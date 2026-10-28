@@ -162,3 +162,8 @@ html{scroll-behavior:smooth}
 .to-top:focus-visible{outline:3px solid var(--mark);outline-offset:3px}
 main h1:focus{outline:none}
 @media (prefers-reduced-motion:reduce){.to-top,.to-top.show{transition:none;transform:none}}
+
+/* product icon beside a title */
+.titled{display:flex;align-items:center;gap:14px}
+.titled img{border-radius:22%;flex:none}
+.cs-hero h1.titled img{width:clamp(52px,9vw,72px);height:auto}
