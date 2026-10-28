@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forkline case study | Jason Von Holmes</title>
+<meta name="description" content="How Forkline, a turn-based space trading sim, was specified, tested and shipped: 27 releases, 15 seeded balance tests and every tester report traced to a fix.">
+<meta property="og:title" content="Forkline: case study">
+<meta property="og:description" content="Specified, tested and shipped in public with AI-assisted coding.">
+<meta property="og:image" content="https://jvholmes87.github.io/assets/og-forkline.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+<script src="../js/theme.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a href="../">Jason Von Holmes</a>
+    <nav aria-label="Site">
+      <a href="../#shipped">Shipped</a>
+      <a href="../#queue">In the queue</a>
+      <a href="../#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap cs-hero">
+    <a class="crumb" href="../">Back to all projects</a>
+    <h1>Forkline</h1>
+    <p class="lede">A turn-based space trading sim for phone and PC, specified, tested and shipped in public. This page covers how it was built and the evidence behind each change.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://jvholmes87.github.io/forkline-play/">Play Forkline</a>
+      <span class="status">Live, in playtesting</span>
+    </div>
+  </div>
+
+  <div class="wrap cs">
+    <aside aria-label="On this page">
+      <ol>
+        <li><a href="#goal">Goal</a></li>
+        <li><a href="#game">The game</a></li>
+        <li><a href="#system">System</a></li>
+        <li><a href="#testing">Testing</a></li>
+        <li><a href="#evolution">Four builds</a></li>
+        <li><a href="#feedback">Report to fix</a></li>
+        <li><a href="#decisions">Decisions</a></li>
+        <li><a href="#ai">Working with AI</a></li>
+        <li><a href="#next">What's next</a></li>
+      </ol>
+    </aside>
+
+    <article>
+      <section id="goal">
+        <h2>Goal</h2>
+        <p>Classic buy-low, sell-high trading games have a great loop and very little depth. I wanted one that teaches something real: distance and time in space, how prices respond to supply, and what debt costs a business. It had to work for players as young as 8, so it targets an E for Everyone rating.</p>
+        <p>It's also the first product I'm taking all the way to launch, on Google Play and the web with one login, as proof of how I build systems: requirements first, every decision logged, every change tested before it ships.</p>
+      </section>
+
+      <section id="game">
+        <h2>The game</h2>
+        <p>You run a freight probe that starts with a $60M loan. You trade across ten stops, from low Earth orbit to Tau Ceti. Travel is free, but every day adds interest and moves the markets. When the mission ends, a copy of you boots up with everything you earned.</p>
+        <ul>
+          <li>Market events grow from rumors into shortages or gluts, then worsen, spread, rebound or fade.</li>
+          <li>Shipper freight and passenger contracts ride alongside your own cargo, so a full hold is a planning problem.</li>
+          <li>Prices from the stars arrive days old because of light-lag.</li>
+          <li>Banks, insurance, a bonded warehouse and a fork foundry give every stop a role.</li>
+          <li>Short tips teach each idea the first time it matters, capped so they never stack up.</li>
+        </ul>
+        <figure>
+          <img src="../assets/forkline/how-to-play.jpg" width="2000" height="1125" loading="lazy" alt="Three phone screens: the market during a shortage, the route list from LEO to Tau Ceti, and the end-of-mission fork screen">
+          <figcaption>Trade, fly, fork: the three steps of a mission.</figcaption>
+        </figure>
+      </section>
+
+      <section id="system">
+        <h2>System</h2>
+        <p>There is no game server. The game is a single HTML file on GitHub Pages; saves, records and tip state stay in the player's browser. The only backend is a feedback database.</p>
+        <ul>
+          <li><strong>Tester reports</strong> go to an insert-only database. Row-level security accepts a report only with a valid tester code, and nothing can be read back publicly.</li>
+          <li><strong>Tester codes</strong> live in a private schema and rotate every 3 days through a scheduled task that also logs the code and notifies me.</li>
+          <li><strong>Privacy by design:</strong> no names, emails or locations are collected; players under 14 need a grown-up's OK; reports delete themselves after 12 months.</li>
+        </ul>
+        <figure>
+          <img src="../assets/forkline/architecture.jpg" width="2000" height="1125" loading="lazy" alt="Architecture diagram: operations lane with a scheduled task that rotates tester codes, runtime lane with player, game, report page and the feedback database, and a feedback-and-build loop from reports to tracker, build, test and publish">
+          <figcaption>Operations, runtime, and the feedback-and-build loop.</figcaption>
+        </figure>
+      </section>
+
+      <section id="testing">
+        <h2>Testing</h2>
+        <p>Every gameplay change runs against the previous version on the same seeds before it ships: 40 missions with a trading bot and 20 with a contract-only bot that models a cautious beginner. Results go into a balance-test log with a pass or fail verdict.</p>
+        <div class="data" role="region" aria-label="Problems fixed, measured" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Problem</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Build</th></tr></thead>
+            <tbody>
+              <tr><td>Contract exploit windfall</td><td>$102.7M</td><td>$1.6M</td><td>v8</td></tr>
+              <tr><td>Beginner path ending in debt</td><td>11 of 20 runs</td><td>0 of 20</td><td>v9</td></tr>
+              <tr><td>Stranding scenarios with no way out</td><td>4 of 4</td><td>0 of 4</td><td>v9</td></tr>
+              <tr><td>Best Trades profit estimate error</td><td>−$11M to −$32M</td><td>within $0.8M</td><td>v11</td></tr>
+              <tr><td>Goods vanishing overnight</td><td>10.3%</td><td>0%</td><td>v14</td></tr>
+              <tr><td>Median daily price move</td><td>13.4%</td><td>2.3%</td><td>v14</td></tr>
+              <tr><td>Best-route margin</td><td>160–1,070%</td><td>35–62%</td><td>v16</td></tr>
+              <tr><td>Bot missions ending negative</td><td>6 of 40</td><td>0 of 40, every build since v20</td><td>v20–v25</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>From v20 on, every economy change was tuned back into a fixed target: a median 45-day result of $150M–$250M with no losing runs. Medians since then: $192M, $210M, $199M, $263M (5% over the band by design, after freight and passengers added a second income stream) and $237M.</p>
+      </section>
+
+      <section id="evolution">
+        <h2>Four builds, same mission</h2>
+        <p>The same seed and screen in four versions shows how the design moved from physics accuracy toward clear decisions for the player.</p>
+        <figure>
+          <img src="../assets/forkline/evolution-route.jpg" width="2000" height="1125" loading="lazy" alt="Route screen in v17, v20, v22 and v25.2: fuel in tonnes and delta-v per trip, then one fuel price per trip, then travel days only">
+          <figcaption>Route screen: fuel as cargo, then one fuel price, then free travel where days are the cost.</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/forkline/evolution-market.jpg" width="2000" height="1125" loading="lazy" alt="Market screen in the same four builds, ending with a How it works tip for new players">
+          <figcaption>Market screen: propellant and three currencies, then dollars only, then full markets, then a first-day tip.</figcaption>
+        </figure>
+      </section>
+
+      <section id="feedback">
+        <h2>From report to fix</h2>
+        <p>Every playtest finding becomes a tracked action with an owner and a release. Ten findings from development playtests shipped, each on the day it was reported.</p>
+        <div class="data" role="region" aria-label="Playtest findings and fixes" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Finding</th><th scope="col">Fix</th><th scope="col">Shipped</th></tr></thead>
+            <tbody>
+              <tr><td>Best Trades profit far below actual</td><td>Per-trade profit; trip cost shown once</td><td>v11</td></tr>
+              <tr><td>Forecasts wrong on arrival; buy Max showed 0</td><td>Stable trend-based markets; Max fixed</td><td>v14</td></tr>
+              <tr><td>$103M cash but a $6.8M score, unexplained</td><td>Loans and savings shown in the header</td><td>v15</td></tr>
+              <tr><td>A full hold stranded the probe</td><td>Max leaves room; help names the real block</td><td>v19</td></tr>
+              <tr><td>Fuel costs breaking the economy</td><td>One fuel price, then no fuel cost</td><td>v20, v21</td></tr>
+              <tr><td>Debt still growing; thin margins</td><td>A market at every stop; event trees</td><td>v22</td></tr>
+              <tr><td>Contracts impossible to fill in time</td><td>Fillable requests; freight and passengers</td><td>v23</td></tr>
+              <tr><td>Building forks lowered the score</td><td>Forks count toward the score, less wear</td><td>v24</td></tr>
+              <tr><td>New players miss services and milestones</td><td>Notices system with 16 tips</td><td>v25</td></tr>
+              <tr><td>First outside tester (age 8–12): didn't know the goal; three words unclear</td><td>"How to play" card; plain-word explanations</td><td>Queued</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="decisions">
+        <h2>Three decisions</h2>
+
+        <div class="decision">
+          <h3>Removing fuel cost</h3>
+          <dl>
+            <dt>Problem</dt><dd>Fuel was modeled as cargo with real delta-v. It caused a run of stranding bugs across ten builds and consumed 58% of gross trade income, so players managed fuel instead of trading.</dd>
+            <dt>Options</dt><dd>Fix fuel-as-cargo again; simplify to one price per trip; remove it.</dd>
+            <dt>Decision</dt><dd>Simplify, then remove. A trip now costs days: interest, markets that move and deadlines that close.</dd>
+            <dt>Evidence</dt><dd>Removing fuel on the old price bands pushed the median to $548M. Narrowing the bands brought it to $210M with 0 of 40 losing runs; the beginner path reached $63M with 0 of 20.</dd>
+            <dt>Trade-off</dt><dd>Less physics in moment-to-moment play. The rocket equation moved into the in-game reference as learning content.</dd>
+          </dl>
+        </div>
+
+        <div class="decision">
+          <h3>A tester code enforced by the database</h3>
+          <dl>
+            <dt>Problem</dt><dd>The report page is public. Bots or trolls could pollute the data, and collecting names or emails would add privacy and under-14 consent burden.</dd>
+            <dt>Options</dt><dd>An open form with a captcha; player accounts; a code sent after a player shares a gameplay screenshot.</dd>
+            <dt>Decision</dt><dd>A rotating code checked by row-level security, not by the page. Rotation is automated every 3 days.</dd>
+            <dt>Evidence</dt><dd>SQL tests: missing and wrong codes blocked, valid code accepted, codes unreadable publicly. Security advisor clean.</dd>
+            <dt>Trade-off</dt><dd>The screenshot step lowers volume. Accepted for data quality.</dd>
+          </dl>
+        </div>
+
+        <div class="decision">
+          <h3>Counting forks toward the score</h3>
+          <dl>
+            <dt>Problem</dt><dd>In a development playtest, building three forks left the score at $154M against a $263M bot median. A core feature punished players for using it.</dd>
+            <dt>Options</dt><dd>Count nothing; count full build cost; count build cost less wear.</dd>
+            <dt>Decision</dt><dd>Build cost less wear: 1/60 per day in service, never below 20% salvage value.</dd>
+            <dt>Evidence</dt><dd>Full cost turned forks into free money, about +$120M for three forks built on day 5. With wear, bot scores were unchanged and only fork builders' scores rose.</dd>
+            <dt>Trade-off</dt><dd>Slightly more complex scoring, shown on the end screen and explained in the in-game reference.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section id="ai">
+        <h2>Working with AI</h2>
+        <p>Forkline is built with AI-assisted coding (Claude). The split of work is deliberate:</p>
+        <ul>
+          <li><strong>My part:</strong> requirements, playtests, every logged decision, release approval, and the call on what ships and what waits.</li>
+          <li><strong>The AI's part:</strong> implementing each change as a versioned patch script, writing the bot test harness, and reporting results against the targets I set.</li>
+          <li><strong>The controls:</strong> a tracker with actions, decisions, releases and balance tests; seeded before-and-after tests on every gameplay change; one commit per release.</li>
+        </ul>
+        <p>It's the same method I apply to compliance and documentation systems for small federal contractors: the AI does the volume, and the system keeps it accountable.</p>
+      </section>
+
+      <section id="next">
+        <h2>What's next</h2>
+        <ul>
+          <li>Public playtest: tester codes by direct message after a gameplay screenshot; testers whose feedback ships are credited in the game.</li>
+          <li>Ship the queued fixes from the first outside tester report.</li>
+          <li>Accounts and cloud saves, then Google Play and a web version with one login.</li>
+        </ul>
+        <p class="note">Last updated October 28, 2026. Numbers come from the project tracker's balance-test and release logs.</p>
+      </section>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Jason Von Holmes</span>
+    <button class="theme-btn" type="button">Dark mode</button>
+  </div>
+</footer>
+</body>
+</html>
