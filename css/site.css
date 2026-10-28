@@ -104,7 +104,7 @@ table{border-collapse:collapse;width:100%}
 .links a span{font:400 var(--step--1) var(--body);color:var(--ink-2);align-self:center}
 .links a:hover{color:var(--mark)}
 
-footer{border-top:1px solid var(--rule);padding:28px 0 40px;color:var(--ink-2);font-size:var(--step--1)}
+footer{border-top:1px solid var(--rule);padding:28px 0 88px;color:var(--ink-2);font-size:var(--step--1)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .theme-btn{background:none;border:1px solid var(--rule);color:var(--ink-2);font:500 var(--step--1) var(--body);padding:6px 10px;border-radius:3px;cursor:pointer;min-height:36px}
 
@@ -150,3 +150,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (max-width:480px){.facts{grid-template-columns:1fr 1fr}.facts div:last-child{grid-column:1/-1}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 html{scroll-behavior:smooth}
+
+/* back to top */
+.to-top{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:20;
+  display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px 0 12px;
+  background:var(--ink);color:var(--paper);border:1.5px solid var(--ink);cursor:pointer;
+  font:600 var(--step-0) var(--display);letter-spacing:.01em;
+  opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility 0s .2s}
+.to-top.show{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
+.to-top:hover{background:var(--mark);border-color:var(--mark);color:#fff}
+.to-top:focus-visible{outline:3px solid var(--mark);outline-offset:3px}
+main h1:focus{outline:none}
+@media (prefers-reduced-motion:reduce){.to-top,.to-top.show{transition:none;transform:none}}
