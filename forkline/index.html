@@ -82,15 +82,20 @@
 
       <section id="system">
         <h2>System</h2>
-        <p>There is no game server. The game is a single HTML file on GitHub Pages; saves, records and tip state stay in the player's browser. The only backend is a feedback database.</p>
+        <p>There is no game server. The game is a single HTML file on GitHub Pages at playforkline.com; saves, records, tips and sound settings stay in the player's browser. The backend is two Supabase functions: one takes tester reports, and one runs an optional crew list for adults.</p>
         <ul>
-          <li><strong>Tester reports</strong> go to an insert-only database. Row-level security accepts a report only with a valid tester code, and nothing can be read back publicly.</li>
-          <li><strong>Tester codes</strong> live in a private schema and rotate every 3 days through a scheduled task that also logs the code and notifies me.</li>
-          <li><strong>Privacy by design:</strong> no names, emails or locations are collected; players under 14 need a grown-up's OK; reports delete themselves after 12 months.</li>
+          <li><strong>Tester reports</strong> need no code. The report function screens out bots first: a hidden honeypot field, a 20-second minimum, Cloudflare Turnstile, 5 reports per hour per connection and 300 a day.</li>
+          <li><strong>The crew list</strong> is adults only and optional: double opt-in by email, a send cap of 90 emails a day, and one-click unsubscribe. Agents can count its rows but never read them.</li>
+          <li><strong>Privacy by design:</strong> reports collect no names, emails or locations; players under 14 need a grown-up's OK; connection addresses are kept only as salted hashes for 2 days; reports are deleted after 12 months.</li>
+          <li><strong>Releases</strong> go to a preview site first and reach playforkline.com only through a pull request I merge.</li>
         </ul>
         <figure>
-          <img src="../assets/forkline/architecture.jpg" width="2000" height="1125" loading="lazy" alt="Architecture diagram: operations lane with a scheduled task that rotates tester codes, runtime lane with player, game, report page and the feedback database, and a feedback-and-build loop from reports to tracker, build, test and publish">
-          <figcaption>Operations, runtime, and the feedback-and-build loop.</figcaption>
+          <img src="../assets/forkline/system-c4.jpg" width="2000" height="1250" loading="lazy" alt="C4 container diagram: the player reaches playforkline.com on GitHub Pages (homepage, game, report page, crew page); the report and crew pages call two Supabase functions that write to Postgres; outside services are Cloudflare Turnstile, Cloudflare Web Analytics, Resend email and Namecheap DNS; studio operations hold AI agents, GitHub, the tracker and the Review Desk, with Jason merging pull requests and answering approvals">
+          <figcaption>C4 container view: what runs where, and which outside services it depends on.</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/forkline/data-flow.jpg" width="2000" height="1250" loading="lazy" alt="Data flow diagram with five trust boundaries: player device, public web, studio backend, data at rest and studio operations. Game state stays in browser storage; reports go through the report function to tester reports; connection addresses are stored only as salted hashes; adult crew sign-ups go through the crew function to the crew list and a confirmation email; agents read reports only and count crew rows">
+          <figcaption>Data flow with trust boundaries: what player data exists, where it goes and how long it stays.</figcaption>
         </figure>
       </section>
 
@@ -144,7 +149,7 @@
               <tr><td>Contracts impossible to fill in time</td><td>Fillable requests; freight and passengers</td><td>v23</td></tr>
               <tr><td>Building forks lowered the score</td><td>Forks count toward the score, less wear</td><td>v24</td></tr>
               <tr><td>New players miss services and milestones</td><td>Notices system with 16 tips</td><td>v25</td></tr>
-              <tr><td>First outside tester (age 8–12): didn't know the goal; three words unclear</td><td>"How to play" card; plain-word explanations</td><td>Queued</td></tr>
+              <tr><td>First outside tester (age 8–12): didn't know the goal; three words unclear</td><td>Guided first trade; tap-to-explain words</td><td>v25.6</td></tr>
             </tbody>
           </table>
         </div>
@@ -165,13 +170,13 @@
         </div>
 
         <div class="decision">
-          <h3>A tester code enforced by the database</h3>
+          <h3>From a tester code to server-side bot checks</h3>
           <dl>
             <dt>Problem</dt><dd>The report page is public. Bots or trolls could pollute the data, and collecting names or emails would add privacy and under-14 consent burden.</dd>
             <dt>Options</dt><dd>An open form with a captcha; player accounts; a code sent after a player shares a gameplay screenshot.</dd>
-            <dt>Decision</dt><dd>A rotating code checked by row-level security, not by the page. Rotation is automated every 3 days.</dd>
-            <dt>Evidence</dt><dd>SQL tests: missing and wrong codes blocked, valid code accepted, codes unreadable publicly. Security advisor clean.</dd>
-            <dt>Trade-off</dt><dd>The screenshot step lowers volume. Accepted for data quality.</dd>
+            <dt>Decision</dt><dd>First, a rotating code checked by row-level security (v25.2). The first reports showed the code step was the biggest barrier for new testers, so v25.6 replaced it with checks inside a server function: a honeypot field, a 20-second minimum, Cloudflare Turnstile, 5 reports per hour per connection and 300 a day.</dd>
+            <dt>Evidence</dt><dd>Code phase: SQL tests blocked missing and wrong codes, and codes were unreadable publicly. Bot-check phase: database tests for the rate limit and daily cap, and the first report through the new path passed Turnstile the afternoon it shipped.</dd>
+            <dt>Trade-off</dt><dd>The form now depends on Cloudflare Turnstile, and no check stops every determined spammer, so every report is still triaged before it counts.</dd>
           </dl>
         </div>
 
@@ -201,12 +206,11 @@
       <section id="next">
         <h2>What's next</h2>
         <ul>
-          <li>Public playtest: tester codes by direct message after a gameplay screenshot; testers whose feedback ships are credited in the game.</li>
-          <li>Ship the queued fixes from the first outside tester report.</li>
-          <li>Launch gate: Google Play work starts once 20 verified testers have each filed a report, with players in every age group (8–12, 13–17, 18+) and an average clarity score of at least 4 out of 5.</li>
-          <li>Then accounts and cloud saves, Google Play, and a web version with one login.</li>
+          <li>Public playtest at playforkline.com: anyone can play a mission and send a report, and testers whose feedback ships are credited in the game.</li>
+          <li>Planned for v25.8: a review of outer-world pay and a calm mode for players who find the screens busy.</li>
+          <li>Launch gates: at 25 verified testers, with players in every age group and an average clarity score of at least 4 out of 5, accounts and cloud saves come next. At 100 registered web players, Google Play work starts.</li>
         </ul>
-        <p class="note">Last updated October 28, 2026. Numbers come from the project tracker's balance-test and release logs.</p>
+        <p class="note">Last updated October 30, 2026. Numbers come from the project tracker's balance-test and release logs.</p>
       </section>
     </article>
   </div>
