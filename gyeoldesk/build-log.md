@@ -2,6 +2,8 @@
 
 Gyeoldesk (결데스크) is a bilingual Korean/English project desk for Korean construction contractors working on USFK installations. Good Neighbor Construction (GNC) is the first company using it. This log is public, so client project details, people's names, contact details and site photos are left out.
 
+Every entry records the feedback from real users that shaped that day's work. People are named by role, not by name.
+
 Case study: https://jvholmes87.github.io/gyeoldesk/
 
 ---
@@ -13,6 +15,14 @@ Case study: https://jvholmes87.github.io/gyeoldesk/
 - 2 database migrations.
 - 1 new server function. Updates to two others.
 - 28 automated tests (14 site, 14 backend).
+
+### Feedback from users
+
+| From | Feedback | What changed |
+|---|---|---|
+| Owner and first user, on a phone | A project card opened part-way down the page, and there was no quick way back to the top. Found while recording a walkthrough. | Cards now open at the top, "Back to the board" returns to the same spot, and a ↑ button appears once you scroll. Shipped the same day. |
+| Owner | Photos must come from the company's private Drive, not public hosting. Labels and the photo status line should use standard industry wording. | The private photo path, the photo-log status wording and the 13 label changes. Shipped the same day. |
+| GNC office team member, first pilot reviewer | The WAR board is too long when grouped by stage. She asked for a progress bar showing each project's stage, sorting oldest to newest or by prime contractor, and no stage list that someone has to keep up by hand. She sent a mockup. | A stage dashboard: a stage bar with counts that filters the board, a one-line list sorted by start date, and a panel per project with its stage, time used, recent activity and records. Stages and dates come from existing data, so nothing is kept by hand. **On preview for review; not yet live.** |
 
 ### What shipped
 
@@ -75,6 +85,7 @@ Case study: https://jvholmes87.github.io/gyeoldesk/
 6. **Printed material is a disclosure too.** Wall posters use example images, and contact screens are kept off them.
 
 ### Next
+- Stage dashboard: review on preview with the pilot reviewer, then release.
 - Team rollout beyond the first two reviewers.
 - WAR outputs generated when a week is finalized.
 - Projects, Bids & proposals and Warranties pages.
