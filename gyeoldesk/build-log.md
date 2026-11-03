@@ -11,10 +11,10 @@ Case study: https://jvholmes87.github.io/gyeoldesk/
 ## 3 November 2026
 
 **Releases**
-- 3 production releases, all approved explicitly in chat. Each went to the preview site first.
+- 4 production releases, all approved explicitly in chat. Each went to the preview site first.
 - 2 database migrations.
 - 1 new server function. Updates to two others.
-- 28 automated tests (14 site, 14 backend).
+- 29 automated tests (15 site, 14 backend).
 
 ### Feedback from users
 
@@ -22,7 +22,7 @@ Case study: https://jvholmes87.github.io/gyeoldesk/
 |---|---|---|
 | Owner and first user, on a phone | A project card opened part-way down the page, and there was no quick way back to the top. Found while recording a walkthrough. | Cards now open at the top, "Back to the board" returns to the same spot, and a ↑ button appears once you scroll. Shipped the same day. |
 | Owner | Photos must come from the company's private Drive, not public hosting. Labels and the photo status line should use standard industry wording. | The private photo path, the photo-log status wording and the 13 label changes. Shipped the same day. |
-| GNC office team member, first pilot reviewer | The WAR board is too long when grouped by stage. She asked for a progress bar showing each project's stage, sorting oldest to newest or by prime contractor, and no stage list that someone has to keep up by hand. She sent a mockup. | A stage dashboard: a stage bar with counts that filters the board, a one-line list sorted by start date, and a panel per project with its stage, time used, recent activity and records. Stages and dates come from existing data, so nothing is kept by hand. **On preview for review; not yet live.** |
+| GNC office team member, first pilot reviewer | The WAR board is too long when grouped by stage. She asked for a progress bar showing each project's stage, sorting oldest to newest or by prime contractor, and no stage list that someone has to keep up by hand. She sent a mockup. | A stage dashboard: a stage bar with counts that filters the board, a one-line list sorted by start date, and a panel per project with its stage, time used, recent activity and records. Stages and dates come from existing data, so nothing is kept by hand. Reviewed on preview, then **released the same evening.** |
 
 ### What shipped
 
@@ -33,7 +33,8 @@ Case study: https://jvholmes87.github.io/gyeoldesk/
 | 3 | **Photo status line** | A short summary in standard photo-log terms: "Showing 14 of 22 photos taken this week (30 Oct–5 Nov)", why the rest aren't shown, and a note that a photo records conditions but does not confirm completion. |
 | 4 | **Card navigation** | Cards open at the top. "Back to the board" returns to where you were. A ↑ button appears once you scroll. |
 | 5 | **Standard labels** | 13 labels changed to standard project and software terms: Users & access, Bids & proposals, Open items, No update this week, Member / Active / Deactivated / Departed, and others. A menu item that did nothing was removed. |
-| 6 | **Report parser fix** | Photo-activity tables in weekly reports were being read as payment rows. Photo sections are now kept out of the payment and public text. |
+| 6 | **Stage dashboard** (evening release) | A stage bar with counts filters the board. Each project gets one line, sorted by start date, prime contractor or stage. Tapping a line shows its stage, details, time used from NTP to completion (marked as time, not work complete), recent activity and recent records. Built from a pilot reviewer's feedback and mockup. |
+| 7 | **Report parser fix** | Photo-activity tables in weekly reports were being read as payment rows. Photo sections are now kept out of the payment and public text. |
 
 ### How the photo path works
 
@@ -83,9 +84,9 @@ Case study: https://jvholmes87.github.io/gyeoldesk/
 4. **Single-page apps keep scroll position across hash routes.** Reset scroll when navigating, and restore it when the user returns.
 5. **When the build machine can't reach an endpoint, verify from the other side.** Database rows, function logs and readback of the live files confirmed each step.
 6. **Printed material is a disclosure too.** Wall posters use example images, and contact screens are kept off them.
+7. **Check a merge before publishing it.** Combining two assistants' preview work left merge-conflict text on the preview page for about a minute. Both deploy scripts now refuse to publish while such text is present.
 
 ### Next
-- Stage dashboard: review on preview with the pilot reviewer, then release.
 - Team rollout beyond the first two reviewers.
 - WAR outputs generated when a week is finalized.
 - Projects, Bids & proposals and Warranties pages.
