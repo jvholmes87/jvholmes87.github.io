@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script async src="https://caldera.social/t/1.js" integrity="sha384-UCnwKWu6Be2g87+ZI1+h367D6yOXEuXFQL2U2Z7PuSoH3oSCsu/cmZMbj4s70JlC" crossorigin="anonymous" data-site="eaac5b5e790b887f"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gyeoldesk case study | Jason Von Holmes</title>
+<meta name="description" content="How Gyeoldesk, a bilingual project desk for Korean contractors on USFK installations, was built and released: preview first, every production release approved, with a public build log.">
+<meta property="og:title" content="Gyeoldesk: case study">
+<meta property="og:description" content="A bilingual project desk for federal construction subcontractors, built with AI-assisted coding under approval gates.">
+<meta property="og:image" content="https://jvholmes87.github.io/assets/gyeoldesk/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jasonvonholmes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../assets/gyeoldesk/icon.svg">
+<link rel="stylesheet" href="../css/site.css">
+<script src="../js/theme.js"></script>
+<script src="../js/top.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a href="../">Jason Von Holmes</a>
+    <nav aria-label="Site">
+      <a href="../#shipped">Shipped</a>
+      <a href="../#queue">In the queue</a>
+      <a href="../#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap cs-hero">
+    <a class="crumb" href="../">Back to all projects</a>
+    <h1 class="titled"><img src="../assets/gyeoldesk/icon.svg" width="72" height="72" alt="">Gyeoldesk</h1>
+    <p class="lede">A bilingual Korean/English project desk for Korean construction contractors working on USFK installations. The first company runs its weekly report, contacts and progress photos on it. This page covers how it is built and what changed, day by day.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://gyeoldesk.com/">Visit gyeoldesk.com</a>
+      <a class="btn" href="https://github.com/jvholmes87/jvholmes87.github.io/blob/main/gyeoldesk/build-log.md">Read the build log</a>
+      <span class="status">Live with its first company</span>
+    </div>
+  </div>
+
+  <div class="wrap cs">
+    <aside aria-label="On this page">
+      <ol>
+        <li><a href="#goal">Goal</a></li>
+        <li><a href="#system">System</a></li>
+        <li><a href="#nov3">3 Nov: what shipped</a></li>
+        <li><a href="#photos">Photos, privately</a></li>
+        <li><a href="#decisions">Decisions</a></li>
+        <li><a href="#lessons">Lessons</a></li>
+        <li><a href="#ai">Working with AI</a></li>
+        <li><a href="#next">What's next</a></li>
+      </ol>
+    </aside>
+
+    <article>
+      <section id="goal">
+        <h2>Goal</h2>
+        <p>Korean subcontractors on U.S. military construction work in two languages, across email, chat, spreadsheets and shared drives. Every weekly report and status sheet was rebuilt by hand, so outputs went stale on their own. Gyeoldesk gives the whole team one current picture of each task order, in Korean or English, on a phone or a computer.</p>
+        <p>The design rule: facts flow one way, from the source records to the outputs. Nobody edits an output by hand.</p>
+      </section>
+
+      <section id="system">
+        <h2>System</h2>
+        <ul>
+          <li><strong>Sources:</strong> the company's Google Drive (weekly report items, project files, photo manifests) and its project-controls tracker (submittal register, contacts, roster).</li>
+          <li><strong>Collector:</strong> Apps Script in the company's own Google account. The weekly report syncs every 15 minutes; records, contacts and photos sync every hour. Every request is signed.</li>
+          <li><strong>Database:</strong> Supabase Postgres in Seoul, with row-level security on every table. One company can never read another's rows.</li>
+          <li><strong>Site:</strong> a static app on GitHub Pages, with one subdomain per company. Sign-in uses an email and a 6-digit code.</li>
+          <li><strong>Releases:</strong> a preview site first. A production release happens only after the owner approves it in writing.</li>
+        </ul>
+      </section>
+
+      <section id="nov3">
+        <h2>3 November: what shipped</h2>
+        <p>That day saw three production releases, two database migrations, one new server function and 28 automated tests. Each release went to preview first and was approved before going live.</p>
+        <div class="data" role="region" aria-label="Updates shipped on 3 November 2026" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Update</th><th scope="col">What a user sees</th></tr></thead>
+            <tbody>
+              <tr><td>Contacts directory</td><td>Who to contact on each project, who gets each email, which address to send from, and what each person can approve. Mobile numbers are visible to admins only.</td></tr>
+              <tr><td>Progress photos</td><td>Photos a named reviewer approved for the week, shown on the project card to signed-in staff. Originals stay in private Drive.</td></tr>
+              <tr><td>Photo status line</td><td>"Showing 14 of 22 photos taken this week (30 Oct–5 Nov)", why the rest aren't shown, and a note that a photo does not confirm completion.</td></tr>
+              <tr><td>Card navigation</td><td>Cards open at the top. "Back to the board" returns to where you were. A ↑ button appears once you scroll.</td></tr>
+              <tr><td>Standard labels</td><td>13 labels changed to standard project and software terms. A menu item that did nothing was removed.</td></tr>
+              <tr><td>Parser fix</td><td>Photo tables in weekly reports had been read as payment rows. They no longer are.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="photos">
+        <h2>Photos, privately</h2>
+        <p>The owner's direction was simple: photos stay in the company's private Google Drive. The site's code repositories are public, so nothing is copied to them, and no share links are created.</p>
+        <ul>
+          <li>A restricted manifest records each photo: its capture date and the evidence for that date, Korean and English captions, verification, and the reviewer's approval in their own words.</li>
+          <li>Only verified, approved, selected photos dated inside the reporting week are released. Everything else contributes counts only.</li>
+          <li>A members-only function checks access through row-level security. It then asks the collector's relay, with a signed request valid for 5 minutes, for Drive's resized thumbnail. The thumbnail is re-encoded, so it carries no camera metadata or location.</li>
+        </ul>
+        <figure style="max-width:340px">
+          <img src="../assets/gyeoldesk/phone-photos.jpg" width="780" height="1688" loading="lazy" alt="Progress photos on a phone: a status line reading Showing all 6 photos taken this week, then photos with capture date, caption and an Open original in Drive link. Example images shown">
+          <figcaption>Progress photos on a phone. Example images; real site photos are visible only to signed-in staff.</figcaption>
+        </figure>
+      </section>
+
+      <section id="decisions">
+        <h2>Decisions</h2>
+
+        <div class="decision">
+          <h3>Private Drive instead of public hosting</h3>
+          <dl>
+            <dt>Problem</dt><dd>The first gallery design copied approved photos into the site's assets, which live in public repositories.</dd>
+            <dt>Options</dt><dd>Public assets; a private storage bucket; serve from Drive through a signed relay.</dd>
+            <dt>Decision</dt><dd>Serve from Drive. A photo has to be on an allow-list of released files, and each request needs a signed, time-limited token.</dd>
+            <dt>Trade-off</dt><dd>Images take a few seconds longer to load, and the relay runs within Apps Script quotas, so the card loads 3 photos at a time.</dd>
+          </dl>
+        </div>
+
+        <div class="decision">
+          <h3>Verification is not approval</h3>
+          <dl>
+            <dt>Problem</dt><dd>A correctly dated, correctly captioned photo can still show people, vehicle plates or site details that shouldn't spread.</dd>
+            <dt>Decision</dt><dd>Technical verification and release are separate steps. A named reviewer releases each photo, and the approval text is recorded word for word. Each audience (internal, prime contractor, public) needs its own approval.</dd>
+            <dt>Evidence</dt><dd>An approval arrived using placeholder IDs copied from an example. The system asked which photos were meant, and did not guess.</dd>
+          </dl>
+        </div>
+
+        <div class="decision">
+          <h3>Counts that add up</h3>
+          <dl>
+            <dt>Problem</dt><dd>The first status line counted some photos twice, as both "historical" and "date unconfirmed".</dd>
+            <dt>Decision</dt><dd>This week's photos are split into shown and not shown. Everything else on record is counted once, as other files.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section id="lessons">
+        <h2>Lessons</h2>
+        <ul>
+          <li><strong>Parallel AI assistants need a re-sync step.</strong> Two assistants pushed to the same branch within an hour. Each build now starts from the latest branch, and the other assistant's commits are reviewed before promotion. That review kept a correct database-filter fix.</li>
+          <li><strong>Exact approval words protect production.</strong> A plain "I approve" didn't unlock a live deploy until the owner confirmed it was meant for production.</li>
+          <li><strong>Examples become inputs.</strong> Placeholder IDs in an instruction were copied straight into a real approval.</li>
+          <li><strong>Verify from the other side.</strong> When the build machine couldn't reach an endpoint, database rows, function logs and readback of the live files confirmed each step.</li>
+        </ul>
+      </section>
+
+      <section id="ai">
+        <h2>Working with AI</h2>
+        <ul>
+          <li><strong>My part:</strong> requirements, the rules on privacy and release, every approval, and the call on what goes live.</li>
+          <li><strong>The AI's part:</strong> implementing each change with tests, publishing to preview, and logging versions and decisions in a shared register and a DevOps log.</li>
+          <li><strong>The controls:</strong> no keys or secrets in any repository, commit or log; preview before production; a written approval for every production step.</li>
+        </ul>
+      </section>
+
+      <section id="next">
+        <h2>What's next</h2>
+        <ul>
+          <li>Rolling out to the rest of the first company's team.</li>
+          <li>Generating the weekly outputs automatically when a week is finalized.</li>
+          <li>Projects, Bids &amp; proposals and Warranties pages.</li>
+        </ul>
+        <p class="note">Last updated November 3, 2026. The full day-by-day record is in the <a href="https://github.com/jvholmes87/jvholmes87.github.io/blob/main/gyeoldesk/build-log.md">public build log</a>. Client project details, people's names and site photos are left out on purpose.</p>
+      </section>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Jason Von Holmes</span>
+    <button class="theme-btn" type="button">Dark mode</button>
+  </div>
+</footer>
+</body>
+</html>
