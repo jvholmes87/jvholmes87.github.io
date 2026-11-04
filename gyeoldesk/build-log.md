@@ -8,6 +8,34 @@ Case study: https://jvholmes87.github.io/gyeoldesk/
 
 ---
 
+## 4 November 2026
+
+**Releases**
+- 2 production releases (v1.6 and v1.7), each on the preview site first and approved explicitly in chat.
+- 20 automated site tests.
+
+### Feedback from users
+
+| From | Feedback | What changed |
+|---|---|---|
+| Owner | Wanted a demo next to the real company, with fake data, that anyone can open without signing in. | A demo company, **released in the morning**. |
+| Owner, as admin | Could not edit people on Users & access. Email, access and role worked, but names, teams and titles couldn't be changed and nobody could be removed. | Edit and remove on each row, plus field labels on phones. **Released the same day.** |
+
+### What shipped
+
+| # | Update | What a user sees |
+|---|---|---|
+| 1 | **Demo company** (v1.6) | gyeoldesk.com/demo opens Halyard Works Contractors, a fictional company from my game Forkline: eight projects at space stations, a prime contractor, contacts and labelled drawings in place of photos. It runs the real app with bundled data, saves nothing and never connects to the database. Dates move forward weekly so it always shows the current week. |
+| 2 | **Edit people on Users & access** (v1.7) | Each person has an Edit button for name, team, title and note. Unticking "Still with the company" ends their access. A row added by mistake can be removed. |
+| 3 | **Phone fixes** (v1.7) | The project panel on the weekly board no longer runs off the right edge of a phone screen, and stage names no longer break mid-word. |
+
+### Lessons
+
+- **Check on a real phone profile.** A 390-pixel desktop window hid the panel overflow. Emulating a phone surfaced it while taking screenshots for a post.
+- **"No edit functions" can mean "not the edit I need".** The page saved emails and roles fine. A screenshot of the page showed what was missing before any code was changed.
+
+---
+
 ## 3 November 2026
 
 **Releases**
