@@ -71,9 +71,10 @@
         <ul>
           <li>Market events grow from rumors into shortages or gluts, then worsen, spread, rebound or fade.</li>
           <li>Shipper freight and passenger contracts ride alongside your own cargo, so a full hold is a planning problem.</li>
-          <li>Prices from the stars arrive days old because of light-lag.</li>
+          <li>Price reports from the stars arrive days old, and the Move screen's Compare view shows how old each one is.</li>
           <li>Banks, insurance, a bonded warehouse and a fork foundry give every stop a role.</li>
           <li>Short tips teach each idea the first time it matters, capped so they never stack up.</li>
+          <li>New players start with a 10-day Beginner mission: one clear goal, a progress bar, and a coach that explains why each trade works.</li>
         </ul>
         <figure>
           <img src="../assets/forkline/how-to-play.jpg" width="2000" height="1125" loading="lazy" alt="Three phone screens: the market during a shortage, the route list from LEO to Tau Ceti, and the end-of-mission fork screen">
@@ -88,6 +89,7 @@
           <li><strong>Tester reports</strong> need no code. The report function screens out bots first: a hidden honeypot field, a 20-second minimum, Cloudflare Turnstile, 5 reports per hour per connection and 300 a day.</li>
           <li><strong>The crew list</strong> is adults only and optional: double opt-in by email, a send cap of 90 emails a day, and one-click unsubscribe. Agents can count its rows but never read them.</li>
           <li><strong>Privacy by design:</strong> reports collect no names, emails or locations; players under 14 need a grown-up's OK; connection addresses are kept only as salted hashes for 2 days; reports are deleted after 12 months.</li>
+          <li><strong>Anonymous counts</strong> (v25.11.1) show where missions start, stall and end, as daily totals plus one summary per finished mission. No player or device IDs and no cookies; connection addresses only as salted hashes for 2 days, as with reports; every table has a daily cap.</li>
           <li><strong>Releases</strong> go to a preview site first and reach playforkline.com only through a pull request I merge.</li>
         </ul>
         <figure>
@@ -136,7 +138,7 @@
 
       <section id="feedback">
         <h2>From report to fix</h2>
-        <p>Every playtest finding becomes a tracked action with an owner and a release. Ten findings from development playtests shipped, each on the day it was reported.</p>
+        <p>Every playtest finding becomes a tracked action with an owner and a release. The first ten came from development playtests and each shipped on the day it was reported. Since the public playtest opened, tester reports drive the changes.</p>
         <div class="data" role="region" aria-label="Playtest findings and fixes" tabindex="0">
           <table>
             <thead><tr><th scope="col">Finding</th><th scope="col">Fix</th><th scope="col">Shipped</th></tr></thead>
@@ -151,6 +153,10 @@
               <tr><td>Building forks lowered the score</td><td>Forks count toward the score, less wear</td><td>v24</td></tr>
               <tr><td>New players miss services and milestones</td><td>Notices system with 16 tips</td><td>v25</td></tr>
               <tr><td>First outside tester (age 8–12): didn't know the goal; three words unclear</td><td>Guided first trade; tap-to-explain words</td><td>v25.6</td></tr>
+<tr><td>Testers asked for an easier start with fewer numbers</td><td>Beginner mission with a Next move coach; Calm view</td><td>v25.8, v25.9</td></tr>
+<tr><td>Three adult testers didn't know what they were working toward</td><td>Your mission screen, goal bar, the coach's why on every step, end recap</td><td>v25.10</td></tr>
+<tr><td>Hard to compare prices across stops</td><td>Move &gt; Compare: one good at every stop, best trip marked</td><td>v25.11</td></tr>
+<tr><td>Reports show what players noticed, not where they quit</td><td>Anonymous mission counts</td><td>v25.11.1</td></tr>
             </tbody>
           </table>
         </div>
@@ -200,6 +206,7 @@
           <li><strong>My part:</strong> requirements, playtests, every logged decision, release approval, and the call on what ships and what waits.</li>
           <li><strong>The AI's part:</strong> implementing each change as a versioned patch script, writing the bot test harness, and reporting results against the targets I set.</li>
           <li><strong>The controls:</strong> a tracker with actions, decisions, releases and balance tests; seeded before-and-after tests on every gameplay change; one commit per release.</li>
+          <li><strong>The review layer:</strong> agents with defined roles put every decision they need from me on a Review Desk, and every agent run is logged on a scorecard I review before it counts.</li>
         </ul>
         <p>It's the same method I apply to compliance and documentation systems for small federal contractors: the AI does the volume, and the system keeps it accountable.</p>
       </section>
@@ -208,10 +215,11 @@
         <h2>What's next</h2>
         <ul>
           <li>Public playtest at playforkline.com: anyone can play a mission and send a report, and testers whose feedback ships are credited in the game.</li>
-          <li>Planned for v25.8: a review of outer-world pay and a calm mode for players who find the screens busy.</li>
-          <li>Launch gates: at 25 verified testers, with players in every age group and an average clarity score of at least 4 out of 5, accounts and cloud saves come next. At 100 registered web players, Google Play work starts.</li>
+          <li>Planned for v25.12: selling floods a market, so its price drops and recovers over days, and the rival probe KESTREL starts beating you to a route you repeat. A build can't ship while any one-line strategy comes within 80% of a thoughtful bot's result.</li>
+          <li>Korean for the first mission, with a language switch.</li>
+          <li>Launch gates (7 of 25 verified testers so far): at 25 verified testers, with players in every age group and an average clarity score of at least 4 out of 5, accounts and cloud saves come next. At 100 registered web players, Google Play work starts.</li>
         </ul>
-        <p class="note">Last updated October 30, 2026. Numbers come from the project tracker's balance-test and release logs.</p>
+        <p class="note">Last updated November 11, 2026. Numbers come from the project tracker's balance-test and release logs.</p>
       </section>
     </article>
   </div>
