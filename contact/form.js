@@ -14,6 +14,7 @@
     return;
   }
   let widgetId = null;
+  let verificationToken = null;
   const setStatus = (msg) => { status.textContent = msg; };
   const loadScript = document.createElement("script");
   loadScript.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
@@ -25,9 +26,9 @@
     }
     widgetId = window.turnstile.render(container, {
       sitekey: config.turnstileSiteKey,
-      callback: () => { send.disabled = false; setStatus("Verification complete. You can send your message."); },
-      "expired-callback": () => { send.disabled = true; setStatus("Verification expired. Please verify again."); },
-      "error-callback": () => { send.disabled = true; setStatus("Verification could not be completed. Please retry."); }
+      callback: (token) => { verificationToken = token; send.disabled = false; setStatus("Verification complete. You can send your message."); },
+      "expired-callback": () => { verificationToken = null; send.disabled = true; setStatus("Verification expired. Please verify again."); },
+      "error-callback": () => { verificationToken = null; send.disabled = true; setStatus("Verification could not be completed. Please retry."); }
     });
     setStatus("Complete the verification to send your message.");
   };
@@ -38,11 +39,13 @@
     event.preventDefault();
     if (!form.reportValidity()) return;
     const data = new FormData(form);
-    if (!data.get("cf-turnstile-response")) {
+    // Include the token explicitly for AJAX even when the widget already injected a hidden field.
+    if (!verificationToken) {
       setStatus("Please complete verification before submitting.");
       send.disabled = true;
       return;
     }
+    data.set("cf-turnstile-response", verificationToken);
     send.disabled = true;
     setStatus("Sending your message…");
     try {
@@ -52,7 +55,8 @@
         headers: { "Accept": "application/json" }
       });
       if (!response.ok) {
-        setStatus("We couldn't send your message. Please try again.");
+        // Do not echo untrusted server text into the page.
+        setStatus(response.status === 429 ? "Too many requests. Please wait and try again." : "We couldn't send your message. Please verify again and retry.");
         return;
       }
       form.reset();
@@ -61,6 +65,7 @@
       setStatus("Network error. Please check your connection and try again.");
     } finally {
       // Tokens are single-use and must be verified server-side by Formspree.
+      verificationToken = null;
       if (widgetId !== null && window.turnstile) window.turnstile.reset(widgetId);
       send.disabled = true;
     }
