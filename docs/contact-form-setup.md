@@ -8,7 +8,9 @@ This is a **static GitHub Pages** form. Client-side HTML/JS sends POST requests 
 
 **Never commit Formspree account credentials, Turnstile private secret, API tokens, or mailbox credentials.** The public Formspree form ID and public Turnstile site key are expected in `contact/config.js`.
 
-The page **fails closed**: no active form or network submission until valid-looking IDs are configured and Turnstile completes. This does **not** prove that Formspree's CAPTCHA setting is enabled; verify it manually before merge.
+The public Formspree form ID (`xeaganzl`) and Turnstile site key have been entered in the draft PR. The submit button stays disabled until a browser Turnstile token is obtained. AJAX explicitly sends `cf-turnstile-response` for server-side validation by Formspree. This does **not** prove Formspree is configured with the matching Turnstile secret; verify that in the Formspree CAPTCHA settings before merge.
+
+The form includes a hidden `_gotcha` field that Formspree ignores when filled by simple spambots. This defense is not a substitute for server-side Turnstile verification.
 
 ## Required account setup (owner)
 
@@ -16,7 +18,7 @@ The page **fails closed**: no active form or network submission until valid-look
 2. In Formspree, enable basic spam filtering, **restrict submissions to the site domain** if available, and set account-level submission notifications/limits. Test any rules: referring-origin restrictions alone are not strong authentication.
 3. In Cloudflare Turnstile, create a **Managed** widget allowing `jasonvholmes.com` and `www.jasonvholmes.com` (and any dedicated preview host actually needed for tests).
 4. In the Formspree form CAPTCHA settings, select **Cloudflare Turnstile**, paste the **private secret** there only, and save. Turnstile is effective only with server-side token verification. Do not put secret in source control.
-5. Enter **public** Formspree form ID and Turnstile site key in `contact/config.js`.
+5. **Completed in draft PR:** public Formspree form ID and Turnstile site key are in `contact/config.js`.
 6. Verify Formspree submission emails arrive at contact@jasonvholmes.com, including the reply-to email, before marking live.
 7. Because `jasonvholmes.com` is moving from LiteSpeed hosting to GitHub Pages, verify domain and HTTPS configuration independently. Do not change MX, SPF, DKIM, or DMARC records for Google Workspace.
 
@@ -34,7 +36,7 @@ The page **fails closed**: no active form or network submission until valid-look
 
 ## Plan assumptions
 
-Formspree's advertised Free plan (checked 16 Nov 2026) includes **50 submissions/month** and basic spam filtering. Custom honeypot rules and advanced controls can require paid plans: **do not claim such protections are enabled on the free tier**. If stronger abuse protection or high volume is needed, reassess plan and service architecture.
+Formspree's `_gotcha` honeypot is available on all plans, including Free, as documented by Formspree. Other advanced anti-spam rules may require a paid plan. Verify the current plan's submission limits and active Formshield settings before release. If stronger abuse protection or high volume is needed, reassess plan and service architecture.
 
 ## Release gate
 
