@@ -15,7 +15,17 @@
   }
   let widgetId = null;
   let verificationToken = null;
+  let submitting = false;
+  let preserveSubmissionStatus = false;
   const setStatus = (msg) => { status.textContent = msg; };
+  const setVerificationStatus = (msg) => {
+    if (!submitting && !preserveSubmissionStatus) setStatus(msg);
+  };
+  form.addEventListener("input", () => {
+    if (submitting || !preserveSubmissionStatus) return;
+    preserveSubmissionStatus = false;
+    setVerificationStatus(verificationToken ? "Verification complete. You can send your message." : "Complete the verification to send your message.");
+  });
   const loadScript = document.createElement("script");
   loadScript.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
   loadScript.async = true;
@@ -26,9 +36,9 @@
     }
     widgetId = window.turnstile.render(container, {
       sitekey: config.turnstileSiteKey,
-      callback: (token) => { verificationToken = token; send.disabled = false; setStatus("Verification complete. You can send your message."); },
-      "expired-callback": () => { verificationToken = null; send.disabled = true; setStatus("Verification expired. Please verify again."); },
-      "error-callback": () => { verificationToken = null; send.disabled = true; setStatus("Verification could not be completed. Please retry."); }
+      callback: (token) => { verificationToken = token; send.disabled = submitting; setVerificationStatus("Verification complete. You can send your message."); },
+      "expired-callback": () => { verificationToken = null; send.disabled = true; setVerificationStatus("Verification expired. Please verify again."); },
+      "error-callback": () => { verificationToken = null; send.disabled = true; setVerificationStatus("Verification could not be completed. Please retry."); }
     });
     setStatus("Complete the verification to send your message.");
   };
@@ -37,6 +47,7 @@
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (submitting) return;
     if (!form.reportValidity()) return;
     const data = new FormData(form);
     // Include the token explicitly for AJAX even when the widget already injected a hidden field.
@@ -46,6 +57,8 @@
       return;
     }
     data.set("cf-turnstile-response", verificationToken);
+    submitting = true;
+    preserveSubmissionStatus = true;
     send.disabled = true;
     setStatus("Sending your message…");
     try {
@@ -66,8 +79,9 @@
     } finally {
       // Tokens are single-use and must be verified server-side by Formspree.
       verificationToken = null;
-      if (widgetId !== null && window.turnstile) window.turnstile.reset(widgetId);
+      submitting = false;
       send.disabled = true;
+      if (widgetId !== null && window.turnstile) window.turnstile.reset(widgetId);
     }
   });
 })();
