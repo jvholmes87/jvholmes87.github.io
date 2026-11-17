@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bob 1 design-stage case study | Jason V. Holmes</title>
+<meta name="description" content="Bob 1: source-traceable design review, interactive engineering visualizations and a staged verification plan for a proposed supervised-autonomy research vessel.">
+<link rel="canonical" href="https://jasonvholmes.com/bob1/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jason V. Holmes">
+<meta property="og:url" content="https://jasonvholmes.com/bob1/">
+<meta property="og:title" content="Bob 1 design-stage case study | Jason V. Holmes">
+<meta property="og:description" content="From design assumptions to testable evidence: a research vessel in design development, with working software visualizations and physical verification still ahead.">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/147929460?v=4">
+<meta property="og:image:alt" content="GitHub profile image of Jason V. Holmes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@jasonvonholmes">
+<meta name="twitter:title" content="Bob 1 design-stage case study | Jason V. Holmes">
+<meta name="twitter:description" content="Design review, source-aware visual tools and planned verification for a supervised-autonomy research USV. No built or water-tested prototype.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/147929460?v=4">
+<meta name="twitter:image:alt" content="GitHub profile image of Jason V. Holmes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+<script src="../js/theme.js"></script>
+<script src="../js/top.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="wrap"><a href="../">Jason V. Holmes</a><nav aria-label="Site"><a href="../#queue">In the queue</a><a href="../#research">Research</a><a href="../contact/">Contact</a></nav></div></header>
+<main id="main">
+  <div class="wrap cs-hero">
+    <a class="crumb" href="../#queue">Back to all projects</a>
+    <h1>PISO-AID / Bob 1</h1>
+    <p class="lede">Turning a small research-vessel design into a controlled engineering baseline, with traceable assumptions and a plan for physical verification.</p>
+    <div class="actions"><a class="btn primary" href="https://jvholmes87.github.io/piso-aid-bob1/visual-explorer/">Open Visual Explorer</a><a class="btn" href="https://jvholmes87.github.io/piso-aid-bob1/water-lab/">Open Water Lab</a><span class="status plain">Design development</span></div>
+    <p class="note">No prototype has been built or water-tested. The linked tools are software visualizations; payload, endurance and autonomous operation remain unverified.</p>
+  </div>
+  <div class="wrap cs">
+    <aside aria-label="On this page"><ol><li><a href="#problem">Problem</a></li><li><a href="#role">My role and attribution</a></li><li><a href="#evidence">What exists</a></li><li><a href="#decisions">Engineering decisions</a></li><li><a href="#verification">Verification</a></li><li><a href="#next">Next evidence</a></li><li><a href="#sources">Sources and rights</a></li></ol></aside>
+    <article>
+      <section id="problem">
+        <h2>Problem</h2>
+        <p>Low-cost supervised autonomy needs evidence about vehicle behavior, operator intervention and the quality of its logs. Bob 1 is a proposed small uncrewed surface vehicle for investigating those questions before considering larger cargo platforms.</p>
+        <p>The immediate engineering problem is configuration control: drawings, electrical concepts and component references need reconciliation before a build can establish trustworthy results. The larger cargo-vessel concept is a separate, crewed development stage.</p>
+      </section>
+      <section id="role">
+        <h2>My role and attribution</h2>
+        <p>I lead the project: defining the research direction, reviewing source records, identifying configuration gaps and setting the evidence required for progression. My analysis and AI-assisted documentation and visualization work support that process.</p>
+        <p>The project belongs to HDES, whose U.S. LLC formation is reported as in progress. Its archive includes commissioned design work and supplier material with their own provenance and rights. Project leadership does not establish sole authorship of those artifacts. Detailed CAD and working records remain private.</p>
+      </section>
+      <section id="evidence">
+        <h2>What exists today</h2>
+        <div class="data" role="region" aria-label="Bob 1 evidence and its limits" tabindex="0"><table>
+          <thead><tr><th scope="col">Artifact</th><th scope="col">What it supports</th><th scope="col">Limit</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/drawing-register.md">V03 drawing register</a></td><td>Mechanical assembly, component and electrical references.</td><td>No sheet released for fabrication; native CAD assembly validation outstanding.</td></tr>
+            <tr><td>Visual Explorer v0.3</td><td>Schematic assembled/exploded views, selectable component groups and all 30 top-level parts-list rows.</td><td>Illustrative geometry; listed parts do not establish purchase or installation.</td></tr>
+            <tr><td>Flotation scenario calculator</td><td>Repeatable ideal-cylinder draft estimates with explicit mass and volume assumptions.</td><td>CAD masses and nominal drum volume; no safe payload or stability rating.</td></tr>
+            <tr><td>Water Lab, Phase 2</td><td>Procedural water scene, camera controls and calculated level-draft placement.</td><td>Visual ripples apply no wave forces; handling and dynamic stability are unmodeled.</td></tr>
+            <tr><td><a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/se-documentation-status.md">Documentation gap assessment</a></td><td>12 planning areas and a reported draft matrix of 34 candidate requirements.</td><td>Coverage counts describe documents; requirements approval and physical test results remain outstanding.</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+      <section id="decisions">
+        <h2>Engineering decisions and open conflicts</h2>
+        <div class="decision"><h3>Reconcile power before procurement</h3><p>The drawing register identifies a 24 V propulsion concept versus a 12 V motor/battery drawing, plus fastener and navigation-light discrepancies. A single approved power, propulsion and interface baseline must precede purchasing and integration.</p></div>
+        <div class="decision"><h3>Separate documented, modeled and measured values</h3><p>The complete-craft mass of 80.40 kg is a CAD value. Four nominal 60 L drums and an assumed circular shape support a preliminary calculation. These inputs are labeled so a visitor can distinguish source values, assumptions and future measurements. Drum crown clearance is kept distinct from deck freeboard.</p></div>
+        <div class="decision"><h3>Use an established autopilot as a proposed stack</h3><p>The current proposal uses Cube Orange+ with ArduPilot Rover, a ground station, telemetry and an operator-priority RC path. The hardware has not been purchased, integrated or tested. Control authority, protected power, interfaces and link-loss behavior still need approved specifications.</p></div>
+      </section>
+      <section id="verification">
+        <h2>What was checked</h2>
+        <p>On 17 November 2026, all three existing software-check suites passed at source revision <code>43b40c7</code>: the Water Lab model, scene geometry/camera checks and Visual Explorer checks. They cover calculation boundaries and scaling, source reference cases, unit conversions, component mapping and controls. These checks validate software behavior within its assumptions.</p>
+        <p>Browser review confirmed the explorer’s 30-row index, exploded-view control and metric switch. Water Lab loaded a WebGL scene and source-backed reference values in this browser. This is a bounded software demonstration; physical-device performance, real vessel behavior and hardware acceptance are separate checks.</p>
+        <p>The published <a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/acceptance-criteria.md">physical acceptance criteria</a> still have unapproved numerical targets and untested status. No route accuracy, intervention rate, endurance or payload result is claimed.</p>
+      </section>
+      <section id="next">
+        <h2>Next evidence to earn</h2>
+        <ol><li>Reconcile drawings, power, propulsion and controls into one approved build configuration.</li><li>Approve measurable requirements, interfaces and a test-specific safety and recovery plan.</li><li>Document procurement and bench integration, including manual override and link-loss behavior.</li><li>Progress through restrained flotation, manual handling and supervised waypoint trials with reviewed criteria.</li><li>Compare measured mass, flotation, telemetry and interventions with the predictions; publish bounded results.</li></ol>
+        <p>Dates depend on scope, resources and permissions. The research questions remain open; no funding award, certification or confirmed operating partnership is implied.</p>
+        <p><a href="../contact/">Discuss a design review or research collaboration</a>.</p>
+      </section>
+      <section id="sources">
+        <h2>Sources and rights</h2>
+        <p>This review uses the <a href="https://github.com/jvholmes87/piso-aid-bob1/tree/43b40c74421d8cef3b7ffb52b6dbc7539bbff835">public project snapshot</a>, its <a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/visual-explorer/SOURCE_REGISTER.md">source register</a>, <a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/control-architecture.md">proposed control architecture</a> and <a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/test-plan.md">staged test plan</a>. Native CAD and physical hardware were not independently inspected here.</p>
+        <p>Copyright HDES. All rights reserved. Public access grants no license to commissioned designs, supplier assets or project content. This page links existing public tools without copying design assets.</p>
+        <p class="note">Evidence reviewed 17 November 2026. Software checks and browser observations are dated separately from the underlying design documents. No fabrication or water-trial release is granted by this case study.</p>
+      </section>
+    </article>
+  </div>
+</main>
+<footer><div class="wrap"><span>© 2026 Jason V. Holmes</span><button class="theme-btn" type="button">Dark mode</button></div></footer>
+</body>
+</html>
