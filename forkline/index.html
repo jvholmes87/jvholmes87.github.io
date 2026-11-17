@@ -59,6 +59,13 @@
     </aside>
 
     <article>
+      <section id="current-evidence">
+        <h2>Current release and evidence scope</h2>
+        <p>Checked 17 November 2026: the <a href="https://github.com/jvholmes87/forkline-play/blob/main/README.md">published-build record</a> identifies public beta v25.13 as of 16 November. The <a href="https://playforkline.com/play/">released game</a> opens in a browser. Saves remain local; accounts and cloud saves are not claimed as shipped.</p>
+        <p>The experiments, screenshots and diagrams below are historical evidence through the 11 November case-study snapshot. Their version labels matter: they do not establish v25.13 test results. Aggregate release, test and decision counts await reconciliation with the project tracker; no new totals are asserted here.</p>
+        <p>Jason owns requirements, playtesting, decisions and release approval. AI-assisted implementation supports that work. The public build is available for browser play; its source and content remain all rights reserved.</p>
+      </section>
+
       <section id="goal">
         <h2>Goal</h2>
         <p>Classic buy-low, sell-high trading games have a great loop and very little depth. I wanted one that teaches something real: distance and time in space, how prices respond to supply, and what debt costs a business. It had to work for players as young as 8, so it targets an E for Everyone rating.</p>
@@ -93,7 +100,7 @@
           <li><strong>Releases</strong> go to a preview site first and reach playforkline.com only through a pull request I merge.</li>
         </ul>
         <figure>
-          <img src="../assets/forkline/system-c4.jpg" width="2000" height="1250" loading="lazy" alt="C4 container diagram: the player reaches playforkline.com on GitHub Pages (homepage, game, report page, crew page); the report and crew pages call two Supabase functions that write to Postgres, and the homepage reads a count-only tester number; outside services are Cloudflare Turnstile, Cloudflare Web Analytics, Resend email, Namecheap DNS and Grok; studio operations hold AI agents, GitHub, the tracker, Google Drive with Grok's daily X reports, and the Command Center, with Jason merging pull requests and answering approvals">
+          <img src="../assets/forkline/system-c4.jpg" width="2000" height="1250" loading="lazy" alt="Historical C4 container diagram: the player reaches playforkline.com on GitHub Pages (homepage, game, report page, crew page); the report and crew pages call two Supabase functions that write to Postgres, and the homepage reads a count-only tester number; outside services are Cloudflare Turnstile, Cloudflare Web Analytics, Resend email, Namecheap DNS and Grok; studio operations hold AI agents, GitHub, the tracker, Google Drive with Grok's daily X reports, and the Command Center, with Jason merging pull requests and answering approvals">
           <figcaption>C4 container view: what runs where, and which outside services it depends on.</figcaption>
         </figure>
         <figure>
@@ -116,7 +123,7 @@
               <tr><td>Goods vanishing overnight</td><td>10.3%</td><td>0%</td><td>v14</td></tr>
               <tr><td>Median daily price move</td><td>13.4%</td><td>2.3%</td><td>v14</td></tr>
               <tr><td>Best-route margin</td><td>160–1,070%</td><td>35–62%</td><td>v16</td></tr>
-              <tr><td>Bot missions ending negative</td><td>6 of 40</td><td>0 of 40, every build since v20</td><td>v20–v25</td></tr>
+              <tr><td>Bot missions ending negative</td><td>6 of 40</td><td>0 of 40 in the recorded v20–v25 runs</td><td>v20–v25</td></tr>
             </tbody>
           </table>
         </div>
@@ -215,11 +222,11 @@
         <h2>What's next</h2>
         <ul>
           <li>Public playtest at playforkline.com: anyone can play a mission and send a report, and testers whose feedback ships are credited in the game.</li>
-          <li>Planned for v25.12: selling floods a market, so its price drops and recovers over days, and the rival probe KESTREL starts beating you to a route you repeat. A build can't ship while any one-line strategy comes within 80% of a thoughtful bot's result.</li>
+          <li>The 11 November plan targeted market-flooding and KESTREL changes for v25.12. The published build has since advanced to v25.13; feature acceptance and balance results still need reconciliation with the release records before this page treats that plan as verified delivery.</li>
           <li>Korean for the first mission, with a language switch.</li>
-          <li>Launch gates (7 of 25 verified testers so far): at 25 verified testers, with players in every age group and an average clarity score of at least 4 out of 5, accounts and cloud saves come next. At 100 registered web players, Google Play work starts.</li>
+          <li>Launch gates recorded on 11 November (7 of 25 verified testers at that snapshot; not a current count): at 25 verified testers, with players in every age group and an average clarity score of at least 4 out of 5, accounts and cloud saves come next. At 100 registered web players, Google Play work starts.</li>
         </ul>
-        <p class="note">Last updated November 11, 2026. Numbers come from the project tracker's balance-test and release logs.</p>
+        <p class="note">Evidence scope reviewed November 17, 2026. Historical narrative and tracker figures are from the November 11 snapshot; current aggregate counts and v25.13 balance evidence remain unverified in this audit.</p>
       </section>
     </article>
   </div>
