@@ -67,7 +67,7 @@ section{padding:clamp(40px,7vw,80px) 0;border-top:1px solid var(--rule)}
 .actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:6px}
 .btn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none;font:600 var(--step-0) var(--display);letter-spacing:.01em}
 .btn.primary{background:var(--ink);color:var(--paper)}
-.btn:hover{text-decoration:none;background:var(--mark);border-color:var(--mark);color:#fff}
+.btn:hover,.btn:focus-visible{text-decoration:none;background:var(--mark);border-color:var(--mark);color:var(--paper)}
 
 /* revision table */
 table{border-collapse:collapse;width:100%}
@@ -160,7 +160,7 @@ html{scroll-behavior:smooth}
   font:600 var(--step-0) var(--display);letter-spacing:.01em;
   opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility 0s .2s}
 .to-top.show{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
-.to-top:hover{background:var(--mark);border-color:var(--mark);color:#fff}
+.to-top:hover,.to-top:focus-visible{background:var(--mark);border-color:var(--mark);color:var(--paper)}
 .to-top:focus-visible{outline:3px solid var(--mark);outline-offset:3px}
 main h1:focus{outline:none}
 @media (prefers-reduced-motion:reduce){.to-top,.to-top.show{transition:none;transform:none}}
