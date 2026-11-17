@@ -92,6 +92,8 @@ table{border-collapse:collapse;width:100%}
 .list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:8px 32px;padding:16px 0;border-bottom:1px solid var(--rule)}
 .list a{font:600 var(--step-1)/1.2 var(--display)}
 .list p{margin:0;color:var(--ink-2)}
+.list .research-summary p + p{margin-top:12px}
+.list .research-summary a{font:inherit;text-decoration:underline}
 @media (max-width:760px){.list li{grid-template-columns:1fr}}
 
 /* about + contact */
