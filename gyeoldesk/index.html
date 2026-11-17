@@ -58,6 +58,7 @@
       <ol>
         <li><a href="#goal">Goal</a></li>
         <li><a href="#system">System</a></li>
+        <li><a href="#current-evidence">Current evidence</a></li>
         <li><a href="#nov3">3 Nov: what shipped</a></li>
         <li><a href="#feedback">Feedback from users</a></li>
         <li><a href="#photos">Photos, privately</a></li>
@@ -69,6 +70,14 @@
     </aside>
 
     <article>
+      <section id="current-evidence">
+        <h2>12–16 November: reporting and release controls</h2>
+        <p>The <a href="https://github.com/jvholmes87/gyeoldesk-site/pull/8">12 November reporting change</a> adds JPG download and replaces blurry PDF font output with static Pretendard fonts. Its recorded reviewer feedback was a blurry printed report and the need for a shareable image. The release record reports English/Korean download checks and TrueType PDF inspection; those export checks were not repeated in this portfolio audit.</p>
+        <p>On 16 November, <a href="https://github.com/jvholmes87/gyeoldesk-site/commit/1056865570f718397d6d4cee8fa8214d14b39b48">release-control housekeeping</a> added CI, third-party notices and documented release rules. A <a href="https://github.com/jvholmes87/gyeoldesk-site/commit/e9275194e880755bf4ec9490744aef00421e247f">separate homepage correction</a> distinguishes features in use from features still being built. This portfolio update does not repeat those product changes.</p>
+        <p>At frontend revision <code>2732960</code>, this audit reran 20 tests: 5 demo-isolation tests, 3 photo-request tests and 12 photo-display tests; all passed on 17 November. This is a frontend test scope, not a replacement for the 29 tests recorded for the 3 November release or proof of backend deployment acceptance.</p>
+        <p>The fictional-data demo opened without sign-in and rendered its weekly board, stage counts and export controls. The <a href="https://github.com/jvholmes87/gyeoldesk-site/blob/2732960812375c119ce9cd56c4b92b51bcc94b5e/README.md">frontend source record</a> identifies WAR reporting, contacts and team access as released, while dedicated Projects, Proposals, Warranties and project questions remain coming soon. Company workspaces receive a release only after synchronization; a merge alone does not prove every company has it.</p>
+      </section>
+
       <section id="goal">
         <h2>Goal</h2>
         <p>Korean subcontractors on U.S. military construction work in two languages, across email, chat, spreadsheets and shared drives. Every weekly report and status sheet was rebuilt by hand, so outputs went stale on their own. Gyeoldesk gives the whole team one current picture of each task order, in Korean or English, on a phone or a computer.</p>
@@ -205,11 +214,11 @@
         <h2>What's next</h2>
         <ul>
           <li>Rolling out to the rest of the first company's team.</li>
-          <li>A WAR drafting agent that prepares each project's weekly update for review, starting with the 12 November week.</li>
+          <li>A WAR drafting agent remains a planned capability here until its project owner supplies acceptance evidence; the earlier 12 November target is not proof of delivery.</li>
           <li>Generating the weekly outputs automatically when a week is finalized.</li>
           <li>Projects, Bids &amp; proposals and Warranties pages.</li>
         </ul>
-        <p class="note">Last updated November 4, 2026. The full day-by-day record is in the <a href="https://github.com/jvholmes87/jvholmes87.github.io/blob/main/gyeoldesk/build-log.md">public build log</a>. Client project details, people's names and site photos are left out on purpose.</p>
+        <p class="note">Evidence scope reviewed November 17, 2026. The November 3–4 sections remain historical snapshots. The full day-by-day record is in the <a href="https://github.com/jvholmes87/jvholmes87.github.io/blob/main/gyeoldesk/build-log.md">public build log</a>. Client project details, people's names and site photos are left out on purpose.</p>
       </section>
     </article>
   </div>
