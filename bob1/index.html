@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../css/site.css"><link rel="stylesheet" href="../css/artifact-stories.css"><script src="../js/artifact-stories.js" defer></script>
 <script src="../js/theme.js"></script>
 <script src="../js/top.js" defer></script>
 </head>
@@ -30,14 +30,11 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="wrap"><a href="../">Jason V. Holmes</a><nav aria-label="Site"><a href="../#queue">In the queue</a><a href="../#research">Research</a><a href="../contact/">Contact</a></nav></div></header>
 <main id="main">
-  <div class="wrap cs-hero">
-    <a class="crumb" href="../#queue">Back to all projects</a>
+  <div class="wrap cs-hero"><div class="visual-lead"><div class="visual-copy"><p class="eyebrow">Systems engineering / design development</p><a class="crumb" href="../#queue">Back to all projects</a>
     <h1>PISO-AID / Bob 1</h1>
     <p class="lede">Turning a small research-vessel design into a controlled engineering baseline, with traceable assumptions and a plan for physical verification.</p>
     <div class="actions"><a class="btn primary" href="https://jvholmes87.github.io/piso-aid-bob1/visual-explorer/">Open Visual Explorer</a><a class="btn" href="https://jvholmes87.github.io/piso-aid-bob1/water-lab/">Open Water Lab</a><span class="status plain">Design development</span></div>
-    <p class="note">No prototype has been built or water-tested. The linked tools are software visualizations; payload, endurance and autonomous operation remain unverified.</p>
-  </div>
-  <div class="wrap cs">
+    <p class="note">No prototype has been built or water-tested. The linked tools are software visualizations; payload, endurance and autonomous operation remain unverified.</p></div><div class="artifact-gallery" data-gallery aria-label="Bob 1 design and software artifacts"><div class="gallery-controls" role="group" aria-label="Choose an artifact view" hidden><button type="button" data-view="0" aria-pressed="true">Design rendering</button><button type="button" data-view="1" aria-pressed="false">Visual Explorer</button><button type="button" data-view="2" aria-pressed="false">Water Lab</button></div><figure data-frame="0"><a href="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/assets/bob1-isometric-01.png" aria-label="Open full image: Design rendering"><img src="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/assets/bob1-isometric-01.png" width="1600" height="900" alt="Bob 1 isometric concept rendering with blue drums, deck and proposed equipment" ></a><figcaption><b>Design rendering.</b> Existing public project design rendering, not a photograph of built hardware. HDES / commissioned-design provenance and rights remain with the source. <a href="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/assets/bob1-isometric-01.png">Open full image ↗</a></figcaption></figure><figure data-frame="1"><a href="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/visual-explorer/assets/explorer-preview.png" aria-label="Open full image: Visual Explorer"><img src="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/visual-explorer/assets/explorer-preview.png" width="1170" height="715" alt="Schematic Bob 1 explorer preview with the steel frame highlighted" loading="lazy"></a><figcaption><b>Visual Explorer.</b> Software visualization with illustrative geometry, not fabrication-scale CAD. Listed components do not establish purchase or installation. <a href="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/visual-explorer/assets/explorer-preview.png">Open full image ↗</a></figcaption></figure><figure data-frame="2"><a href="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/water-lab/progress/2026-11-01/phase-02-complete-craft-golden.jpg" aria-label="Open full image: Water Lab"><img src="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/water-lab/progress/2026-11-01/phase-02-complete-craft-golden.jpg" width="1348" height="926" alt="Recorded Water Lab complete-craft scene" loading="lazy"></a><figcaption><b>Water Lab.</b> Recorded November 1 software scene. Visual water is not wave-force simulation or a water trial; the documented deck/frame alignment issue remains open. <a href="https://raw.githubusercontent.com/jvholmes87/piso-aid-bob1/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/water-lab/progress/2026-11-01/phase-02-complete-craft-golden.jpg">Open full image ↗</a></figcaption></figure><noscript><p>All artifact views are shown below with JavaScript disabled.</p></noscript></div></div></div><section class="wrap visual-overview" aria-labelledby="bob-overview"><p class="eyebrow">Three evidence classes</p><h2 id="bob-overview">Design it. Model it. Then measure it.</h2><div class="evidence-cards"><div><span class="stage-label">Available</span><h3>Design records</h3><p>Renderings, drawing references and a configuration-gap register.</p></div><div><span class="stage-label">Software checked</span><h3>Interactive models</h3><p>Source-aware assembly views and idealized flotation calculations.</p></div><div><span class="stage-label planned">Still ahead</span><h3>Physical evidence</h3><p>Build, bench integration, flotation and supervised trials remain unverified.</p></div></div><p class="artifact-note">No image above establishes a fabricated vessel, safe payload, endurance or autonomous operation.</p></section><div class="wrap cs">
     <aside aria-label="On this page"><ol><li><a href="#problem">Problem</a></li><li><a href="#role">My role and attribution</a></li><li><a href="#evidence">What exists</a></li><li><a href="#decisions">Engineering decisions</a></li><li><a href="#verification">Verification</a></li><li><a href="#next">Next evidence</a></li><li><a href="#sources">Sources and rights</a></li></ol></aside>
     <article>
       <section id="problem">
@@ -52,7 +49,7 @@
       </section>
       <section id="evidence">
         <h2>What exists today</h2>
-        <div class="data" role="region" aria-label="Bob 1 evidence and its limits" tabindex="0"><table>
+        <details class="evidence-details"><summary>Inspect the artifact-by-artifact evidence map</summary><div class="data" role="region" aria-label="Bob 1 evidence and its limits" tabindex="0"><table>
           <thead><tr><th scope="col">Artifact</th><th scope="col">What it supports</th><th scope="col">Limit</th></tr></thead>
           <tbody>
             <tr><td><a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/drawing-register.md">V03 drawing register</a></td><td>Mechanical assembly, component and electrical references.</td><td>No sheet released for fabrication; native CAD assembly validation outstanding.</td></tr>
@@ -61,7 +58,7 @@
             <tr><td>Water Lab, Phase 2</td><td>Procedural water scene, camera controls and calculated level-draft placement.</td><td>Visual ripples apply no wave forces; handling and dynamic stability are unmodeled.</td></tr>
             <tr><td><a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/se-documentation-status.md">Documentation gap assessment</a></td><td>12 planning areas and a reported draft matrix of 34 candidate requirements.</td><td>Coverage counts describe documents; requirements approval and physical test results remain outstanding.</td></tr>
           </tbody>
-        </table></div>
+        </table></div></details>
       </section>
       <section id="decisions">
         <h2>Engineering decisions and open conflicts</h2>
@@ -84,7 +81,7 @@
       <section id="sources">
         <h2>Sources and rights</h2>
         <p>This review uses the <a href="https://github.com/jvholmes87/piso-aid-bob1/tree/43b40c74421d8cef3b7ffb52b6dbc7539bbff835">public project snapshot</a>, its <a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/visual-explorer/SOURCE_REGISTER.md">source register</a>, <a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/control-architecture.md">proposed control architecture</a> and <a href="https://github.com/jvholmes87/piso-aid-bob1/blob/43b40c74421d8cef3b7ffb52b6dbc7539bbff835/docs/test-plan.md">staged test plan</a>. Native CAD and physical hardware were not independently inspected here.</p>
-        <p>Copyright HDES. All rights reserved. Public access grants no license to commissioned designs, supplier assets or project content. This page links existing public tools without copying design assets.</p>
+        <p>Copyright HDES. All rights reserved. Public access grants no license to commissioned designs, supplier assets or project content. This page references existing public design/software images and links the public tools; it grants no reuse rights. Image captions preserve the distinction between design, visualization and physical evidence.</p>
         <p class="note">Evidence reviewed 17 November 2026. Software checks and browser observations are dated separately from the underlying design documents. No fabrication or water-trial release is granted by this case study.</p>
       </section>
     </article>

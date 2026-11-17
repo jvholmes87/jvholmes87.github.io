@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../css/site.css"><link rel="stylesheet" href="../css/artifact-stories.css"><script src="../js/artifact-stories.js" defer></script>
 <script src="../js/theme.js"></script>
 <script src="../js/top.js" defer></script>
 </head>
@@ -30,14 +30,11 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="wrap"><a href="../">Jason V. Holmes</a><nav aria-label="Site"><a href="../#queue">In the queue</a><a href="../#shipped">Shipped</a><a href="../contact/">Contact</a></nav></div></header>
 <main id="main">
-  <div class="wrap cs-hero">
-    <a class="crumb" href="../#queue">Back to all projects</a>
+  <div class="wrap cs-hero"><div class="visual-lead"><div class="visual-copy"><p class="eyebrow">Software engineering / team-built foundation</p><a class="crumb" href="../#queue">Back to all projects</a>
     <h1>FamilyLedger</h1>
     <p class="lede">Building toward a household and small-business ledger from SpendWise, a team-built finance application with tested authentication, data workflows and user isolation.</p>
     <div class="actions"><a class="btn primary" href="https://github.com/jvholmes87/familyledger">Explore the source</a><a class="btn" href="https://github.com/jvholmes87/familyledger/actions/runs/43887549262">Review the CI run</a><span class="status plain">Baseline imported · In development</span></div>
-    <p class="note">The current baseline retains SpendWise branding. A current hosted FamilyLedger deployment was not verified in this review.</p>
-  </div>
-  <div class="wrap cs">
+    <p class="note">The current baseline retains SpendWise branding. A current hosted FamilyLedger deployment was not verified in this review.</p></div><div class="artifact-gallery" data-gallery aria-label="SpendWise baseline interface screenshots"><div class="gallery-controls" role="group" aria-label="Choose an artifact view" hidden><button type="button" data-view="0" aria-pressed="true">Dashboard</button><button type="button" data-view="1" aria-pressed="false">Income workflow</button></div><figure data-frame="0"><a href="https://raw.githubusercontent.com/jvholmes87/familyledger/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/docs/screenshots/income/dashboard-balance.png" aria-label="Open full image: Dashboard"><img src="https://raw.githubusercontent.com/jvholmes87/familyledger/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/docs/screenshots/income/dashboard-balance.png" width="1400" height="1695" alt="SpendWise demo dashboard showing income, expenses, category bars and recent activity" ></a><figcaption><b>Dashboard.</b> Repository screenshot of the inherited SpendWise interface using the demo account. Sample amounts are not personal financial records or FamilyLedger results. <a href="https://raw.githubusercontent.com/jvholmes87/familyledger/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/docs/screenshots/income/dashboard-balance.png">Open full image ↗</a></figcaption></figure><figure data-frame="1"><a href="https://raw.githubusercontent.com/jvholmes87/familyledger/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/docs/screenshots/income/income-tab.png" aria-label="Open full image: Income workflow"><img src="https://raw.githubusercontent.com/jvholmes87/familyledger/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/docs/screenshots/income/income-tab.png" width="1400" height="1184" alt="SpendWise demo income screen with recurring-source form and income list" loading="lazy"></a><figcaption><b>Income workflow.</b> Demo-account capture of the inherited income workflow. SpendWise branding is retained; this does not show the planned FamilyLedger account/entity extensions. <a href="https://raw.githubusercontent.com/jvholmes87/familyledger/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/docs/screenshots/income/income-tab.png">Open full image ↗</a></figcaption></figure><noscript><p>All artifact views are shown below with JavaScript disabled.</p></noscript></div></div></div><section class="wrap visual-overview" aria-labelledby="ledger-overview"><p class="eyebrow">From inherited product to controlled continuation</p><h2 id="ledger-overview">A working baseline. A clear next boundary.</h2><div class="snapshot-grid"><div><b>183</b><span>unit/component tests passed in the dated local review</span></div><div><b>23</b><span>browser tests in the inspected isolated CI run</span></div><div><b>3</b><span>credited SpendWise contributors</span></div></div><ol class="evidence-flow"><li><b>Interface</b><span>Capture and validate a workflow</span></li><li><b>Authenticated server</b><span>Resolve the signed-in user</span></li><li><b>Owner-scoped data</b><span>Apply database ownership policies</span></li></ol><p class="artifact-note">Explanatory architecture summary, not a production security certification. Detailed evidence and limitations follow.</p></section><div class="wrap cs">
     <aside aria-label="On this page"><ol><li><a href="#problem">Problem</a></li><li><a href="#contribution">Team and my role</a></li><li><a href="#baseline">Current baseline</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#testing">Test evidence</a></li><li><a href="#next">FamilyLedger direction</a></li><li><a href="#sources">Sources and license</a></li></ol></aside>
     <article>
       <section id="problem">
@@ -51,7 +48,7 @@
       </section>
       <section id="baseline">
         <h2>What the source contains</h2>
-        <div class="data" role="region" aria-label="Inherited features and evidence" tabindex="0"><table>
+        <details class="evidence-details"><summary>Inspect the inherited feature and evidence map</summary><div class="data" role="region" aria-label="Inherited features and evidence" tabindex="0"><table>
           <thead><tr><th scope="col">Area</th><th scope="col">Baseline implementation</th><th scope="col">Evidence boundary</th></tr></thead>
           <tbody>
             <tr><td>Authentication</td><td>Sign-up/sign-in, session refresh, protected routes and logout.</td><td>Source, unit tests and recorded CI browser flow; production configuration remains unverified.</td></tr>
@@ -59,7 +56,7 @@
             <tr><td>CSV handling</td><td>Import parsing/validation and authenticated data export with paginated reads.</td><td>Source and test coverage; no real financial files used in this review.</td></tr>
             <tr><td>Access boundaries</td><td>Owner-scoped database policies and authenticated server-side data access.</td><td>Recorded isolated CI tests exercise database and application surfaces; no production-wide security guarantee.</td></tr>
           </tbody>
-        </table></div>
+        </table></div></details>
       </section>
       <section id="architecture">
         <h2>Architecture and engineering choices</h2>
