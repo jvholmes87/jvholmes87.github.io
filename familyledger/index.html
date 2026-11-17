@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FamilyLedger engineering case study | Jason V. Holmes</title>
+<meta name="description" content="FamilyLedger's SpendWise foundation: team-built finance workflows, user-scoped data access and isolated test evidence, with later product extensions still planned.">
+<link rel="canonical" href="https://jasonvholmes.com/familyledger/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jason V. Holmes">
+<meta property="og:url" content="https://jasonvholmes.com/familyledger/">
+<meta property="og:title" content="FamilyLedger engineering case study | Jason V. Holmes">
+<meta property="og:description" content="A team-built SpendWise baseline, traceable test evidence and the next steps for FamilyLedger. Product development remains in progress.">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/147929460?v=4">
+<meta property="og:image:alt" content="GitHub profile image of Jason V. Holmes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@jasonvonholmes">
+<meta name="twitter:title" content="FamilyLedger engineering case study | Jason V. Holmes">
+<meta name="twitter:description" content="Team attribution, inherited finance workflows, isolated CI and clearly separated future FamilyLedger capabilities.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/147929460?v=4">
+<meta name="twitter:image:alt" content="GitHub profile image of Jason V. Holmes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+<script src="../js/theme.js"></script>
+<script src="../js/top.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="wrap"><a href="../">Jason V. Holmes</a><nav aria-label="Site"><a href="../#queue">In the queue</a><a href="../#shipped">Shipped</a><a href="../contact/">Contact</a></nav></div></header>
+<main id="main">
+  <div class="wrap cs-hero">
+    <a class="crumb" href="../#queue">Back to all projects</a>
+    <h1>FamilyLedger</h1>
+    <p class="lede">Building toward a household and small-business ledger from SpendWise, a team-built finance application with tested authentication, data workflows and user isolation.</p>
+    <div class="actions"><a class="btn primary" href="https://github.com/jvholmes87/familyledger">Explore the source</a><a class="btn" href="https://github.com/jvholmes87/familyledger/actions/runs/43887549262">Review the CI run</a><span class="status plain">Baseline imported · In development</span></div>
+    <p class="note">The current baseline retains SpendWise branding. A current hosted FamilyLedger deployment was not verified in this review.</p>
+  </div>
+  <div class="wrap cs">
+    <aside aria-label="On this page"><ol><li><a href="#problem">Problem</a></li><li><a href="#contribution">Team and my role</a></li><li><a href="#baseline">Current baseline</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#testing">Test evidence</a></li><li><a href="#next">FamilyLedger direction</a></li><li><a href="#sources">Sources and license</a></li></ol></aside>
+    <article>
+      <section id="problem">
+        <h2>Problem</h2>
+        <p>A useful ledger needs consistent records, clear summaries and reliable access boundaries. SpendWise addressed personal expense and income tracking. FamilyLedger is the intended continuation toward household and small-business needs, with additional account, entity and currency concepts still to be developed.</p>
+      </section>
+      <section id="contribution">
+        <h2>Team and my role</h2>
+        <p><strong>SpendWise was designed and built by Leighton Tidwell, Jason Holmes and Eric Hill</strong> for UMGC CMSC 495 in Summer 2026. I am one of those contributors and lead the FamilyLedger continuation. The inherited application is shared team work; this case study does not assign every module to me.</p>
+        <p>The repository identifies SpendWise commit <code>754c558</code> as the import baseline and states that the team consented to publication. Later FamilyLedger extensions are attributed to Jason Holmes, but the planned extension list below is not presented as completed implementation.</p>
+      </section>
+      <section id="baseline">
+        <h2>What the source contains</h2>
+        <div class="data" role="region" aria-label="Inherited features and evidence" tabindex="0"><table>
+          <thead><tr><th scope="col">Area</th><th scope="col">Baseline implementation</th><th scope="col">Evidence boundary</th></tr></thead>
+          <tbody>
+            <tr><td>Authentication</td><td>Sign-up/sign-in, session refresh, protected routes and logout.</td><td>Source, unit tests and recorded CI browser flow; production configuration remains unverified.</td></tr>
+            <tr><td>Ledger workflows</td><td>Expense creation/editing/deletion, expense and income categories, recurring income and dashboard summaries.</td><td>Inherited SpendWise features with unit/component and browser coverage.</td></tr>
+            <tr><td>CSV handling</td><td>Import parsing/validation and authenticated data export with paginated reads.</td><td>Source and test coverage; no real financial files used in this review.</td></tr>
+            <tr><td>Access boundaries</td><td>Owner-scoped database policies and authenticated server-side data access.</td><td>Recorded isolated CI tests exercise database and application surfaces; no production-wide security guarantee.</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+      <section id="architecture">
+        <h2>Architecture and engineering choices</h2>
+        <p>The baseline uses Next.js 16, React, TypeScript, Tailwind and Supabase. Server actions validate workflow inputs, while Supabase Auth and cookie-based sessions support protected routes. Database migrations enable row-level security with user ownership checks. Route protection and database authorization serve different parts of the access boundary.</p>
+        <p>The Calm Ledger design system centralizes theme tokens and uses tabular numerals for money. Pure functions handle recurrence, summary calculations and CSV transformations so those rules can be tested without a hosted database.</p>
+        <p>The <a href="https://github.com/jvholmes87/familyledger/pull/2">CI isolation change</a> addresses missing hosted test configuration by starting an ephemeral local Supabase stack, applying repository migrations and passing its local configuration to the browser suite. The workflow checks that the generated API address is local and tears down the stack afterward. This avoids using production financial records for automated checks.</p>
+      </section>
+      <section id="testing">
+        <h2>Verified test evidence</h2>
+        <p>At repository revision <code>a23315a</code>, the 17 November portfolio review reran lint, TypeScript checking and <strong>183 unit/component tests across 29 files</strong>; all passed. Local review used Node 26.13.0. No application behavior was changed.</p>
+        <p>The inspected <a href="https://github.com/jvholmes87/familyledger/actions/runs/43887549262">16 November CI run</a>, at PR revision <code>4d10468</code>, passed lint, type checking, 183 unit tests and <strong>23 Playwright browser tests</strong> using Node 22 and local Supabase. That is recorded CI evidence, not a fresh local browser rerun. Docker was unavailable in this review environment, so the local database/browser stage was not repeated.</p>
+        <p>Browser test sources include <a href="https://github.com/jvholmes87/familyledger/blob/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/e2e/data-isolation.spec.ts">two-user database isolation</a> and <a href="https://github.com/jvholmes87/familyledger/blob/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/e2e/isolation-surfaces.spec.ts">separate-user application surfaces</a>. Passing tests support those defined scenarios; independent security review and current hosted deployment acceptance remain separate.</p>
+      </section>
+      <section id="next">
+        <h2>FamilyLedger direction</h2>
+        <p>The repository describes accounts/entities, multi-currency, budgets, statement import and an agent operating layer as later work. Their requirements, implementation, tests and acceptance should be tracked individually before the portfolio calls them available.</p>
+        <ol><li>Confirm the next product requirements and reconcile historical scaffold instructions with the imported feature baseline.</li><li>Implement scoped FamilyLedger extensions with contributor provenance and test evidence.</li><li>Verify an isolated, synthetic-data demonstration and its deployed revision before adding a live-demo link.</li><li>Review access controls, import/export behavior and recovery procedures for the actual release configuration.</li></ol>
+        <p><a href="../contact/">Discuss the engineering approach or a collaboration</a>.</p>
+      </section>
+      <section id="sources">
+        <h2>Sources and license</h2>
+        <p>Source snapshot: <a href="https://github.com/jvholmes87/familyledger/tree/a23315aab6ccc5d0b84999c31ffc73a2877d9f38">FamilyLedger at a23315a</a>. Scope and credits are recorded in the <a href="https://github.com/jvholmes87/familyledger/blob/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/README.md">README</a>; CI and E2E assertions are available with the source.</p>
+        <p>The application source uses the <a href="https://github.com/jvholmes87/familyledger/blob/a23315aab6ccc5d0b84999c31ffc73a2877d9f38/LICENSE">MIT license</a>, copyright 2026 Leighton Tidwell, Jason Holmes and Eric Hill. Preserve that notice. The repository's public source availability does not authorize disclosure of anyone's financial records.</p>
+        <p class="note">Evidence reviewed 17 November 2026. This case study uses source and synthetic-test evidence; no private financial information, account credentials or production records are included.</p>
+      </section>
+    </article>
+  </div>
+</main>
+<footer><div class="wrap"><span>© 2026 Jason V. Holmes</span><button class="theme-btn" type="button">Dark mode</button></div></footer>
+</body>
+</html>
