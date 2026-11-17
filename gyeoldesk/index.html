@@ -58,6 +58,8 @@
       <ol>
         <li><a href="#goal">Goal</a></li>
         <li><a href="#system">System</a></li>
+        <li><a href="#architecture">Architecture and trust boundaries</a></li>
+        <li><a href="#traceability">Requirements to evidence</a></li>
         <li><a href="#current-evidence">Current evidence</a></li>
         <li><a href="#nov3">3 Nov: what shipped</a></li>
         <li><a href="#feedback">Feedback from users</a></li>
@@ -90,10 +92,39 @@
         <ul>
           <li><strong>Sources:</strong> the company's Google Drive (weekly report items, project files, photo manifests) and its project-controls tracker (submittal register, contacts, roster).</li>
           <li><strong>Collector:</strong> Apps Script in the company's own Google account. The weekly report syncs every 15 minutes; records, contacts and photos sync every hour. Every request is signed.</li>
-          <li><strong>Database:</strong> Supabase Postgres in Seoul, with row-level security on every table. One company can never read another's rows.</li>
+          <li><strong>Database:</strong> Supabase Postgres in Seoul. Organization-scoped access policies are designed to restrict records to approved company members, with internal notes and raw source text reserved for admins. Live cross-company isolation requires separate acceptance tests.</li>
           <li><strong>Site:</strong> a static app on GitHub Pages, with one subdomain per company. Sign-in uses an email and a 6-digit code.</li>
           <li><strong>Releases:</strong> a preview site first. A production release happens only after the owner approves it in writing.</li>
         </ul>
+      </section>
+
+      <section id="architecture">
+        <h2>Architecture and trust boundaries</h2>
+        <p>Gyeoldesk separates source records, ingestion, authorized storage and presentation. The browser is a consumer of approved data; a hidden screen or client-side flag is not an authorization boundary.</p>
+        <ol>
+          <li><strong>Source to intake:</strong> a collector reads the company's Drive records and tracker, then sends signed requests to backend intake. Source identifiers, modification times and content hashes support traceability and duplicate detection. The collector's account permissions and signing credentials remain operational controls.</li>
+          <li><strong>Intake to database:</strong> backend code stores company-scoped records. The schema separates team-visible snapshots from internal notes and raw source text. Finalized weeks have write-lock controls. Source inspection establishes the intended controls; deployed migration state and denial tests establish whether they work in production.</li>
+          <li><strong>Database to browser:</strong> signed-in workspaces use membership and role checks. The public demo follows a separate bundled-data path that refuses writes and sign-in. Preview uses the live database, so it needs the same care as a real workspace.</li>
+          <li><strong>Photo request to private Drive:</strong> the photo service reads released records as the caller, then requests an allowed thumbnail through a signed relay. Manifest verification, release authority, reporting-week selection and successful image decoding are separate checks. Changing Drive sharing is not a fallback for failed access.</li>
+        </ol>
+        <p>The <a href="https://github.com/jvholmes87/gyeoldesk-site/blob/2732960812375c119ce9cd56c4b92b51bcc94b5e/README.md">frontend/deployment map</a> and <a href="https://github.com/jvholmes87/gyeoldesk-site/blob/2732960812375c119ce9cd56c4b92b51bcc94b5e/docs/war-photo-integration.md">photo integration record</a> explain these boundaries. Backend schema and service source were inspected privately for this review; client documents, operational examples, credentials and private source links are excluded.</p>
+      </section>
+
+      <section id="traceability">
+        <h2>Requirements to evidence</h2>
+        <p>This is a portfolio review map of engineering needs, implementation and evidence. It is not an approved project-wide requirements baseline. Each result has a defined scope.</p>
+        <div class="data" role="region" aria-label="Engineering needs and acceptance evidence" tabindex="0"><table>
+          <thead><tr><th scope="col">Need</th><th scope="col">Implementation / evidence</th><th scope="col">Acceptance boundary</th></tr></thead>
+          <tbody>
+            <tr><td>Let visitors explore without touching company data.</td><td>Bundled fictional demo; <a href="https://github.com/jvholmes87/gyeoldesk-site/blob/2732960812375c119ce9cd56c4b92b51bcc94b5e/tests/demo.test.mjs">5 tests</a> passed on 17 November, including network isolation and write refusal. Browser WAR board opened.</td><td>Verified for the demo path; this does not test live tenant authorization.</td></tr>
+            <tr><td>Keep internal material outside ordinary team access.</td><td>Separate internal/raw-source schema and role policies inspected in backend source.</td><td>Current deployed policy inventory and denied-access tests with controlled member/admin/other-company identities remain unverified in this audit.</td></tr>
+            <tr><td>Make reporting reproducible and preserve final records.</td><td>Source timestamps, content hashes and final-week lock controls inspected in schema and collector records.</td><td>Live duplicate-ingest, final-week rejection and authorized correction tests remain outstanding.</td></tr>
+            <tr><td>Show only appropriately released photos, with honest failures.</td><td><a href="https://github.com/jvholmes87/gyeoldesk-site/blob/2732960812375c119ce9cd56c4b92b51bcc94b5e/tests/war-photos.test.mjs">12 display tests</a> and <a href="https://github.com/jvholmes87/gyeoldesk-site/blob/2732960812375c119ce9cd56c4b92b51bcc94b5e/tests/photo-request.test.mjs">3 request tests</a> passed on 17 November: scope/release gates, readable fallback, one refresh after expiry and no authorization bypass.</td><td>Fictional local fixtures; real manifest selection, service access, relay behavior and actual decoded images need controlled end-to-end evidence.</td></tr>
+            <tr><td>Ship the reviewed frontend to company workspaces.</td><td>Preview/owner-merge/sync process; source revision, 36 asset comparisons and 14 live-file readbacks recorded above.</td><td>Served frontend verified. Deployment of backend functions and database migrations is tracked separately.</td></tr>
+            <tr><td>Produce readable bilingual report outputs.</td><td>12 November release records JPG and PDF-font checks in English and Korean, linked above.</td><td>Recorded release evidence; fresh exported files were not inspected in this audit.</td></tr>
+          </tbody>
+        </table></div>
+        <p><strong>Next acceptance package:</strong> a dated configuration inventory, controlled test identities and synthetic records, expected allowed/denied outcomes, actual responses, deployment revisions and owner sign-off. Keep that evidence in the project's restricted operating record; publish only an approved, sanitized summary.</p>
       </section>
 
       <section id="nov3">
