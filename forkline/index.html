@@ -55,6 +55,7 @@
   <div class="wrap cs">
     <aside aria-label="On this page">
       <ol>
+        <li><a href="#current-evidence">Current evidence</a></li>
         <li><a href="#goal">Goal</a></li>
         <li><a href="#game">The game</a></li>
         <li><a href="#system">System</a></li>
@@ -71,7 +72,10 @@
       <section id="current-evidence">
         <h2>Current release and evidence scope</h2>
         <p>Checked 17 November 2026: the <a href="https://github.com/jvholmes87/forkline-play/blob/main/README.md">published-build record</a> identifies public beta v25.13 as of 16 November. The <a href="https://playforkline.com/play/">released game</a> opens in a browser. Saves remain local; accounts and cloud saves are not claimed as shipped.</p>
-        <p>The experiments, screenshots and diagrams below are historical evidence through the 11 November case-study snapshot. Their version labels matter: they do not establish v25.13 test results. Aggregate release, test and decision counts await reconciliation with the project tracker; no new totals are asserted here.</p>
+        <p>The experiments, screenshots and diagrams below are historical evidence through the 11 November case-study snapshot. Their version labels matter: they do not establish v25.13 test results. The tracker was reconciled on 17 November: 45 distinct release records (including report-page and crew-list releases), 27 balance-test records and 94 decision records. These are cumulative engineering records, not 45 game versions, 27 passing tests or 94 accepted decisions. Two decision records remain proposed; balance records include failed probes and unreleased v25.14 work.</p>
+        <p><strong>v25.13 release evidence:</strong> Jason merged the <a href="https://github.com/jvholmes87/forkline-play/pull/16">public release</a> on 14 November 2026 at 23:43 KST. Its live build tag was rechecked on 17 November. BT-025 records 40 reference-bot missions and 20 contract-only missions on fixed seeds: reference median fund $226.1M (about 3% below v25.12), contract-only median $93.8M, and no negative runs in those samples.</p>
+        <p>The same record reports a dominance ratio of 0.609, below the 0.8 gate. That ratio compares the best tested one-sentence loop with the best thinking bot, not only the reference bot. KESTREL's repeated-route rule passed; Compute and its data-center events remain disabled in v25.13. Later BT-027 work targets v25.14 and is not evidence of a released feature. These are inspected historical test records, not a fresh rerun or a guarantee for every player.</p>
+        <p><strong>Playtest snapshot:</strong> the tracker and public count-only meter agree on 8 verified testers toward the 25-player gate as checked on 17 November. This is an alias-deduplicated report-based count excluding TEST, not total players, visits or missions. The tracker records clarity at 2.3/5 for the latest 10 of 11 reports, below the 4/5 launch target; the launch gate is not met.</p>
         <p>Jason owns requirements, playtesting, decisions and release approval. AI-assisted implementation supports that work. The public build is available for browser play; its source and content remain all rights reserved.</p>
       </section>
 
@@ -235,7 +239,7 @@
           <li>Korean for the first mission, with a language switch.</li>
           <li>Launch gates recorded on 11 November (7 of 25 verified testers at that snapshot; not a current count): at 25 verified testers, with players in every age group and an average clarity score of at least 4 out of 5, accounts and cloud saves come next. At 100 registered web players, Google Play work starts.</li>
         </ul>
-        <p class="note">Evidence scope reviewed November 17, 2026. Historical narrative and tracker figures are from the November 11 snapshot; current aggregate counts and v25.13 balance evidence remain unverified in this audit.</p>
+        <p class="note">Evidence scope reviewed November 17, 2026. Historical narrative and tracker figures are from the November 11 snapshot; current aggregate counts and v25.13 balance evidence are summarized in Current evidence above as inspected records, not a fresh rerun.</p>
       </section>
     </article>
   </div>
