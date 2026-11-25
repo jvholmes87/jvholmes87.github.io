@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BidDesk Case 001: The 20-Day Bid | Jason V. Holmes</title>
+<meta name="description" content="A 20-day federal bid, a bilingual three-volume proposal and the verification workflow behind BidDesk, the planned Gyeoldesk bid-building module.">
+<link rel="canonical" href="https://jasonvholmes.com/gyeoldesk/biddesk/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jason V. Holmes">
+<meta property="og:url" content="https://jasonvholmes.com/gyeoldesk/biddesk/">
+<meta property="og:title" content="BidDesk Case 001: The 20-Day Bid">
+<meta property="og:description" content="One person plus AI agents took a bilingual federal proposal from go/no-go to on-time submission in 20 days.">
+<meta property="og:image" content="https://jasonvholmes.com/assets/biddesk/bid-schedule-social.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Case 001 schedule compared with the next-bid target">
+<meta property="og:image" content="https://jasonvholmes.com/assets/biddesk/bid-workflow-social.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Case 001 workflow compared with the planned BidDesk pipeline">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jasonvonholmes">
+<meta name="twitter:title" content="BidDesk Case 001: The 20-Day Bid">
+<meta name="twitter:description" content="One person plus AI agents took a bilingual federal proposal from go/no-go to on-time submission in 20 days.">
+<meta name="twitter:image" content="https://jasonvholmes.com/assets/biddesk/bid-schedule-social.png">
+<meta name="twitter:image:alt" content="Case 001 schedule compared with the next-bid target">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/gyeoldesk/icon.svg">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="biddesk.css">
+<script src="../../js/theme.js"></script>
+<script src="../../js/top.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a href="../../">Jason Von Holmes</a>
+    <nav aria-label="Site">
+      <a href="../">Gyeoldesk</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap cs-hero bid-hero">
+    <a class="crumb" href="../">Back to Gyeoldesk</a>
+    <p class="bid-module">Planned Gyeoldesk module</p>
+    <h1>BidDesk Case 001 <span>The 20-Day Bid</span></h1>
+    <p class="lede">One person plus AI agents built a bilingual federal proposal. The Government confirmed on-time submission 20 days after the go/no-go process began.</p>
+    <dl class="bid-metrics" aria-label="Case 001 at a glance">
+      <div><dt>Bid cycle</dt><dd>20 days</dd></div>
+      <div><dt>Proposal</dt><dd>3 volumes</dd></div>
+      <div><dt>Package</dt><dd>19 attachments</dd></div>
+      <div><dt>Languages</dt><dd>Korean / English</dd></div>
+    </dl>
+  </div>
+
+  <div class="wrap cs">
+    <aside aria-label="On this page">
+      <ol>
+        <li><a href="#roles">The five roles</a></li>
+        <li><a href="#schedule">The timetable</a></li>
+        <li><a href="#workflow">The workflow</a></li>
+        <li><a href="#errors">What we logged</a></li>
+        <li><a href="#template">The next-bid template</a></li>
+        <li><a href="#biddesk">What BidDesk will automate</a></li>
+      </ol>
+    </aside>
+
+    <article>
+      <section id="roles">
+        <h2>The five roles</h2>
+        <p>A two-person Korean small business bid directly on a U.S. federal solicitation. The proposal work would typically take a three- or four-person proposal shop. AI agents took on drafting, research, Korean/English translation, verification and record-keeping.</p>
+        <dl class="bid-roles">
+          <div>
+            <dt>Jason V. Holmes during the bid</dt>
+            <dd>Capture &amp; Proposal Manager</dd>
+            <dd>Systems Engineer</dd>
+            <dd>AI Engineer</dd>
+            <dd>Software Engineer</dd>
+          </div>
+          <div>
+            <dt>Jason V. Holmes in the performance phase</dt>
+            <dd>Construction Manager</dd>
+          </div>
+        </dl>
+        <h3>Who carried the work</h3>
+        <p>The figures show estimated shares of effort-hours for the roles listed. The Executive Sponsor &amp; Pricing Authority (CEO) made pricing decisions, and the Proposal Coordinator / Submitter of Record ran submission logistics.</p>
+        <dl class="bid-load">
+          <div><dt>AI agent production layer</dt><dd>~40%</dd></div>
+          <div><dt>Capture &amp; Proposal Manager</dt><dd>~30%</dd></div>
+          <div><dt>Specialty Subcontractor (fabric structure OEM) with structural engineering consultant</dt><dd>~10%</dd></div>
+          <div><dt>Executive Sponsor &amp; Pricing Authority (CEO)</dt><dd>~10%</dd></div>
+          <div><dt>Proposal Coordinator / Submitter of Record</dt><dd>~8%</dd></div>
+        </dl>
+        <p>The structural calculation went through three revisions as it moved from Korean Design Standards (KDS) to ASCE 7-22 / UFC.</p>
+      </section>
+
+      <section id="schedule">
+        <h2>The timetable</h2>
+        <p>Case 001 went through drafting, structural review, signatures and final assembly inside one 20-day cycle. The next-bid template brings package setup to day 1, starts supplier requests in one wave and sets earlier gates for signatures and submission.</p>
+        <figure class="bid-chart">
+          <img src="../../assets/biddesk/bid-schedule.svg" width="1027" height="598" loading="lazy" alt="Two Gantt charts compare the 20-day as-run schedule with a target that moves decisions, supplier requests and verification earlier. Red marks where work compressed.">
+          <figcaption>The Gantt shows when the compression happened. <a href="../../assets/biddesk/bid-schedule.svg">View full-size schedule</a></figcaption>
+        </figure>
+      </section>
+
+      <section id="workflow">
+        <h2>The workflow</h2>
+        <p>One person routed every artifact between the people and agents doing the work. The source-check gate depended on applying the same rule at every handoff. The planned BidDesk pipeline builds verification into the handoff and keeps decisions with people.</p>
+        <figure class="bid-chart">
+          <img src="../../assets/biddesk/bid-workflow.svg" width="850" height="960" loading="lazy" alt="The as-run diagram routes artifacts through the Capture &amp; Proposal Manager. The target diagram shows intake, parallel agent lanes, built-in verification and human decision gates.">
+          <figcaption>The architecture shows why the work compressed and which manual handoffs BidDesk is designed to remove. <a href="../../assets/biddesk/bid-workflow.svg">View full-size workflow</a></figcaption>
+        </figure>
+      </section>
+
+      <section id="errors">
+        <h2>What we logged</h2>
+        <dl class="bid-metrics bid-error-metrics" aria-label="Verification results">
+          <div><dt>Errors logged and closed before submission</dt><dd>17</dd></div>
+          <div><dt>Caught in one automated source-check pass before upload</dt><dd>8</dd></div>
+        </dl>
+        <p>Every bad call came from using a proxy for the underlying artifact. Filenames stood in for files, text layers for rendered pages, seller web copy for specification sheets, and website lists for contracts.</p>
+        <p class="bid-rule"><strong>Open the file.</strong> Render the actual document before making a claim about its state or contents. Trace each proposal fact to a primary record such as the contract, a data sheet or a test report before it enters a volume.</p>
+      </section>
+
+      <section id="template">
+        <h2>The next-bid template</h2>
+        <p>Template v1 sets a gate for each phase. From day 1, a signature matrix tracks every signature, seal and date block. A submission folder with numbered slots doubles as a checklist. A shared spelling registry keeps proper nouns consistent across volumes.</p>
+        <div class="data" role="region" aria-label="Next-bid phases and gates" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">When</th><th scope="col">Phase</th><th scope="col">Gate</th></tr></thead>
+            <tbody>
+              <tr><td>Day 1</td><td>Break down requirements and set up the compliance matrix, signature matrix, package slots and deadlines.</td><td>Confirm the setup is ready and check submitter readiness.</td></tr>
+              <tr><td>Days 1–2</td><td>Assess whether to bid.</td><td>Get the executive go/no-go decision by day 2.</td></tr>
+              <tr><td>Days 2–10</td><td>Prepare and submit Government questions.</td><td>Submit all questions before the cutoff.</td></tr>
+              <tr><td>Days 2–12</td><td>Send supplier requests in one wave.</td><td>Before each call, prepare a bilingual spec card with known specs, open questions and a reply deadline.</td></tr>
+              <tr><td>Days 8–16</td><td>Draft volumes and source-check every handoff.</td><td>Verify every claim against its primary record, including supplier claims.</td></tr>
+              <tr><td>24 hours before deadline</td><td>Complete signatures and seals.</td><td>Close every row in the signature matrix.</td></tr>
+              <tr><td>18 hours before deadline</td><td>Executive freeze.</td><td>Rebuild once after the freeze. Later changes require a named executive exception.</td></tr>
+              <tr><td>2 hours before deadline</td><td>Verify and submit the final package.</td><td>Capture Government confirmation.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Targets for each bid</h3>
+        <ul>
+          <li>Zero errors reach leadership or the Government.</li>
+          <li>Zero incorrect calls about document state.</li>
+          <li>Zero signatures in the final two hours.</li>
+          <li>Submit at least two hours before the deadline.</li>
+          <li>Zero supplier calls with incomplete specifications.</li>
+        </ul>
+      </section>
+
+      <section id="biddesk">
+        <h2>What BidDesk will automate</h2>
+        <p>BidDesk is the planned bid-building module for Gyeoldesk. Case 001 is the baseline for its design.</p>
+        <ol>
+          <li><strong>Intake.</strong> Turn solicitation requirements into a compliance matrix and create signature rows, package slots and deadline records.</li>
+          <li><strong>Parallel agent lanes.</strong> Give Government Q&amp;A, supplier requests and spec cards, volume drafting, and evidence verification their own workstreams.</li>
+          <li><strong>Built-in verification.</strong> Run a source check at every handoff and verify document state from the rendered file.</li>
+          <li><strong>Native audit trail.</strong> Record changes and evidence as the work moves, then draft lessons learned for the next template revision.</li>
+        </ol>
+        <p><strong>Case 002 will be measured against this baseline.</strong></p>
+        <div class="actions">
+          <a class="btn primary" href="../../contact/">Contact Jason</a>
+          <a class="btn" href="../">Explore Gyeoldesk</a>
+        </div>
+      </section>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Jason Von Holmes</span>
+    <button class="theme-btn" type="button">Dark mode</button>
+  </div>
+</footer>
+</body>
+</html>
