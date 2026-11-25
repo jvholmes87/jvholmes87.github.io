@@ -1,0 +1,114 @@
+.bid-hero h1 span {
+  display: block;
+}
+
+.bid-hero .bid-module {
+  margin: 0 0 .5rem;
+  color: var(--mark);
+  font-weight: 600;
+}
+
+.bid-metrics,
+.bid-roles {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--rule);
+  background: var(--rule);
+}
+
+.bid-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 28px 0 0;
+}
+
+.bid-metrics div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: .2rem;
+}
+
+.bid-metrics div,
+.bid-roles div {
+  padding: clamp(12px, 2vw, 22px);
+  background: var(--sheet);
+}
+
+.bid-metrics dt,
+.bid-roles dt {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+
+.bid-metrics dd {
+  margin: 0;
+  font: 600 var(--step-2)/1.12 var(--display);
+}
+
+.bid-roles {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 24px 0;
+}
+
+.bid-roles dt {
+  margin-bottom: .5rem;
+}
+
+.bid-roles dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.bid-load {
+  max-width: var(--measure);
+  border-top: 1px solid var(--rule);
+}
+
+.bid-load div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.25rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.bid-load dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.cs .bid-chart img {
+  width: 100%;
+  background: #f8f9f7;
+}
+
+.cs .bid-chart figcaption {
+  padding: .65rem .8rem;
+}
+
+.bid-chart figcaption a {
+  display: block;
+  width: fit-content;
+}
+
+.bid-error-metrics {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 16px 0 20px;
+}
+
+.bid-rule {
+  padding: .8rem 1rem;
+  border-inline-start: 3px solid var(--mark);
+  background: var(--sheet);
+}
+
+@media (max-width: 650px) {
+  .bid-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bid-roles {
+    grid-template-columns: 1fr;
+  }
+}
