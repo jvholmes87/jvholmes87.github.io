@@ -113,7 +113,7 @@
           <li><strong>Releases</strong> go to a preview site first and reach playforkline.com only through a pull request I merge.</li>
         </ul>
         <figure>
-          <img src="../assets/forkline/system-c4.jpg" width="2000" height="1250" loading="lazy" alt="Historical C4 container diagram: the player reaches playforkline.com on GitHub Pages (homepage, game, report page, crew page); the report and crew pages call two Supabase functions that write to Postgres, and the homepage reads a count-only tester number; outside services are Cloudflare Turnstile, Cloudflare Web Analytics, Resend email, Namecheap DNS and Grok; studio operations hold AI agents, GitHub, the tracker, Google Drive with Grok's daily X reports, and the Command Center, with Jason merging pull requests and answering approvals">
+          <img src="../assets/forkline/system-c4.jpg" width="2000" height="1250" loading="lazy" alt="C4 container diagram, Nov 2026: the player reaches playforkline.com on GitHub Pages (homepage, game, report page, crew page); the report and crew pages and the game call three Supabase functions (crew, report, anonymous counts) that write to Postgres, and the homepage reads a count-only tester number; outside services are Cloudflare Turnstile, Cloudflare Web Analytics, Resend email, Namecheap DNS and Grok; studio operations hold AI agents, GitHub, the tracker, Google Drive with Grok's daily X reports, and the Command Center, with Jason merging pull requests and answering approvals">
           <figcaption>C4 container view: what runs where, and which outside services it depends on.</figcaption>
         </figure>
         <figure>
